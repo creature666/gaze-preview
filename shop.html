@@ -695,10 +695,11 @@
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
 
   @media (max-width: 768px) {
-    nav { padding: 18px 20px; }
-    .nav-logo img { height: 18px !important; }
-    .nav-links { gap: 20px; }
-    .nav-links a { font-size: 9px; letter-spacing: 0.15em; }
+    nav { padding: 18px 20px; gap: 12px; }
+    .nav-logo img { height: 16px !important; }
+    .nav-links { gap: 14px; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
 
     .page-header { padding: 100px 20px 40px; flex-direction: column; gap: 8px; }
 

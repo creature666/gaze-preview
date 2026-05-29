@@ -285,139 +285,6 @@
     color: rgba(255,255,255,0.7);
   }
 
-  /* B2B */
-  .section-b2b {
-    background: var(--red);
-    padding: 120px 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    color: white;
-  }
-
-  .b2b-title {
-    font-family: var(--sans);
-    font-size: clamp(60px, 9vw, 130px);
-    font-weight: 700;
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-  }
-
-  .b2b-content {}
-
-  .b2b-text {
-    font-size: 13px;
-    line-height: 1.8;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 48px;
-  }
-
-  .b2b-partners {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 48px;
-  }
-
-  .b2b-partner {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 14px;
-    transition: all 0.2s;
-    cursor: default;
-  }
-
-  .b2b-partner:hover {
-    color: white;
-    border-color: rgba(255,255,255,0.6);
-  }
-
-  .b2b-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.4);
-    padding-bottom: 4px;
-    transition: gap 0.3s;
-  }
-
-  .b2b-cta:hover { gap: 24px; }
-  .b2b-cta::after { content: '→'; }
-
-  /* WHERE */
-  .section-where {
-    padding: 120px 48px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-  }
-
-  .where-title {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    line-height: 1.6;
-    position: sticky;
-    top: 120px;
-    align-self: start;
-  }
-
-  .cities-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px 80px;
-  }
-
-  .city-block {}
-
-  .city-name {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    color: var(--black);
-  }
-
-  .city-locations {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .city-locations li {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(0,0,0,0.5);
-    line-height: 1.6;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    padding-bottom: 12px;
-  }
-
-  .city-locations li span {
-    display: block;
-    font-size: 10px;
-    color: rgba(0,0,0,0.3);
-    margin-top: 4px;
-  }
-
   /* FOOTER */
   footer {
     background: var(--black);
@@ -672,13 +539,6 @@
     .section-header { flex-direction: column; gap: 16px; margin-bottom: 40px; }
     .products-grid { grid-template-columns: repeat(2, 1fr); }
 
-    .section-b2b { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
-    .b2b-title { font-size: 48px; }
-
-    .section-where { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
-    .where-title { position: static; }
-    .cities-grid { grid-template-columns: 1fr; gap: 40px; }
-
     footer { padding: 48px 20px 32px; }
     .footer-grid { grid-template-columns: 1fr; gap: 40px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -695,8 +555,8 @@
   <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
   <ul class="nav-links">
     <li><a href="shop.html">Каталог</a></li>
-    <li><a href="#where">Где купить</a></li>
-    <li><a href="#b2b">B2B</a></li>
+    <li><a href="where.html">Где купить</a></li>
+    <li><a href="b2b.html">B2B</a></li>
     <li><a href="collab.html">Коллаборации</a></li>
   </ul>
   <div class="nav-right">
@@ -791,77 +651,6 @@
       <div class="product-name">Кондиционер Red Mercury</div>
       <div class="product-sub">Рефилл 5 литров</div>
       <div class="product-price">7 500 ₽</div>
-    </div>
-  </div>
-</section>
-
-<!-- B2B -->
-<section class="section-b2b" id="b2b">
-  <div class="b2b-title reveal">B2B</div>
-  <div class="b2b-content reveal">
-    <p class="b2b-text">Мы производим мыло, лосьоны, шампуни, диффузоры и жидкости для ароматомашин на базе ароматов из нашей коллекции. Тщательно подбираем партнёров.</p>
-    <div class="b2b-partners">
-      <div class="b2b-partner">Aster</div>
-      <div class="b2b-partner">La Virgen Moscow</div>
-      <div class="b2b-partner">Jessica Gallery</div>
-      <div class="b2b-partner">Hood Gym</div>
-      <div class="b2b-partner">Evoe Bar</div>
-      <div class="b2b-partner">Tiger Lilly</div>
-      <div class="b2b-partner">Igla</div>
-      <div class="b2b-partner">No Regrets</div>
-    </div>
-    <a href="#" class="b2b-cta">Стать партнёром</a>
-  </div>
-</section>
-
-<!-- WHERE -->
-<section class="section-where" id="where">
-  <div>
-    <h2 class="where-title reveal">Где<br>купить</h2>
-  </div>
-  <div class="cities-grid">
-    <div class="city-block reveal">
-      <div class="city-name">Санкт-Петербург</div>
-      <ul class="city-locations">
-        <li>TIGER LILY <span>Итальянская ул., 19, ТЦ Пассаж секция 52-54</span></li>
-        <li>STUDIO SLOW <span>Барочная ул., 6с1</span></li>
-        <li>ВРЕМЯ ПЕРЕМЕН HOME <span>Новая Голландия 2 этаж</span></li>
-        <li>HOOD GYM <span>Дегтярный пер., 26</span></li>
-      </ul>
-    </div>
-    <div class="city-block reveal">
-      <div class="city-name">Москва</div>
-      <ul class="city-locations">
-        <li>ЛОКАЛЫ</li>
-        <li>NUW.STORE <span>Flacon</span></li>
-        <li>STUDIO SLOW <span>Хлебозавод</span></li>
-        <li>Fashion Rebels <span>Петровка 15</span></li>
-        <li>WILDHORN <span>Последний переулок 25к2</span></li>
-      </ul>
-    </div>
-    <div class="city-block reveal">
-      <div class="city-name">Казань</div>
-      <ul class="city-locations">
-        <li>STUDIO SLOW <span>ул. Островского, 98; ул. Чернышевского, 27</span></li>
-      </ul>
-    </div>
-    <div class="city-block reveal">
-      <div class="city-name">Махачкала</div>
-      <ul class="city-locations">
-        <li>A REVER SPACE <span>ул. Ахмата-Хаджи Кадырова 44, этаж 2</span></li>
-      </ul>
-    </div>
-    <div class="city-block reveal">
-      <div class="city-name">Краснодар</div>
-      <ul class="city-locations">
-        <li>Хорошист <span>ул. Красная, 137</span></li>
-      </ul>
-    </div>
-    <div class="city-block reveal">
-      <div class="city-name">Пермь</div>
-      <ul class="city-locations">
-        <li>PLACE SHOP <span>Советская ул., 28A</span></li>
-      </ul>
     </div>
   </div>
 </section>

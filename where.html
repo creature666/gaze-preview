@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>GAZE — Коллаборации</title>
+<title>GAZE — Где купить</title>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,7 +15,6 @@
     --red: #C8352A;
     --black: #0A0A0A;
     --gray: #8A8A8A;
-    --serif: Arial, sans-serif;
     --sans: Arial, sans-serif;
   }
 
@@ -44,7 +43,7 @@
   .nav-logo img { filter: invert(1); }
 
   .nav-logo {
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.25em;
@@ -72,67 +71,65 @@
   .nav-links a:hover,
   .nav-links a.active { opacity: 1; }
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
+  /* WHERE */
+  .section-where {
+    padding: 200px 48px 120px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    min-height: 80vh;
   }
 
-  /* PAGE HEADER */
-  .page-header {
-    padding: 154px 48px 60px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+  .where-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    position: sticky;
+    top: 220px;
+    align-self: start;
   }
 
-  .page-title {
+  .cities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px 80px;
+  }
+
+  .city-name {
     font-family: var(--sans);
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-  }
-
-  /* COLLAB */
-  .collab-section {
-    min-height: 50vh;
-  }
-
-  .collab-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    list-style: none;
-  }
-
-  .collab-item {
-    padding: 40px 48px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .collab-name {
-    font-size: 13px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
+    margin-bottom: 20px;
     color: var(--black);
-    font-weight: 400;
   }
 
-  .collab-arrow {
+  .city-locations {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .city-locations li {
     font-size: 11px;
-    color: var(--gray);
-    opacity: 0;
-    transition: opacity 0.3s;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 12px;
   }
 
-  .collab-item:hover .collab-arrow {
-    opacity: 1;
-  }
-
-  .collab-item:hover {
-    cursor: default;
+  .city-locations li span {
+    display: block;
+    font-size: 10px;
+    color: rgba(0,0,0,0.3);
+    margin-top: 4px;
   }
 
   /* FOOTER */
@@ -360,11 +357,9 @@
     .nav-links::-webkit-scrollbar { display: none; }
     .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
 
-    .page-header { padding: 100px 20px 40px; }
-
-    .collab-list { grid-template-columns: 1fr; }
-    .collab-item { padding: 24px 20px; }
-    .collab-name { font-size: 11px; }
+    .section-where { padding: 120px 20px 60px; grid-template-columns: 1fr; gap: 40px; }
+    .where-title { position: static; }
+    .cities-grid { grid-template-columns: 1fr; gap: 40px; }
 
     footer { padding: 48px 20px 32px; }
     .footer-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -382,52 +377,63 @@
   <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
   <ul class="nav-links">
     <li><a href="shop.html">Каталог</a></li>
-    <li><a href="where.html">Где купить</a></li>
+    <li><a href="where.html" class="active">Где купить</a></li>
     <li><a href="b2b.html">B2B</a></li>
-    <li><a href="collab.html" class="active">Коллаборации</a></li>
+    <li><a href="collab.html">Коллаборации</a></li>
   </ul>
 </nav>
 
-<div class="page-header">
-  <div class="page-title">Коллаборации</div>
-</div>
-
-<div class="collab-section">
-  <ul class="collab-list">
-    <li class="collab-item">
-      <span class="collab-name">HOMIES</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Renegade Radio Camp</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Backyard Boxing</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Liars Collective</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">DOM RADIO</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Yandex</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Peeks</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">hideout</span>
-      <span class="collab-arrow">→</span>
-    </li>
-  </ul>
-</div>
+<!-- WHERE -->
+<section class="section-where">
+  <div>
+    <h2 class="where-title">Где<br>купить</h2>
+  </div>
+  <div class="cities-grid">
+    <div class="city-block">
+      <div class="city-name">Санкт-Петербург</div>
+      <ul class="city-locations">
+        <li>TIGER LILY <span>Итальянская ул., 19, ТЦ Пассаж секция 52-54</span></li>
+        <li>STUDIO SLOW <span>Барочная ул., 6с1</span></li>
+        <li>ВРЕМЯ ПЕРЕМЕН HOME <span>Новая Голландия 2 этаж</span></li>
+        <li>HOOD GYM <span>Дегтярный пер., 26</span></li>
+      </ul>
+    </div>
+    <div class="city-block">
+      <div class="city-name">Москва</div>
+      <ul class="city-locations">
+        <li>ЛОКАЛЫ</li>
+        <li>NUW.STORE <span>Flacon</span></li>
+        <li>STUDIO SLOW <span>Хлебозавод</span></li>
+        <li>Fashion Rebels <span>Петровка 15</span></li>
+        <li>WILDHORN <span>Последний переулок 25к2</span></li>
+      </ul>
+    </div>
+    <div class="city-block">
+      <div class="city-name">Казань</div>
+      <ul class="city-locations">
+        <li>STUDIO SLOW <span>ул. Островского, 98; ул. Чернышевского, 27</span></li>
+      </ul>
+    </div>
+    <div class="city-block">
+      <div class="city-name">Махачкала</div>
+      <ul class="city-locations">
+        <li>A REVER SPACE <span>ул. Ахмата-Хаджи Кадырова 44, этаж 2</span></li>
+      </ul>
+    </div>
+    <div class="city-block">
+      <div class="city-name">Краснодар</div>
+      <ul class="city-locations">
+        <li>Хорошист <span>ул. Красная, 137</span></li>
+      </ul>
+    </div>
+    <div class="city-block">
+      <div class="city-name">Пермь</div>
+      <ul class="city-locations">
+        <li>PLACE SHOP <span>Советская ул., 28A</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -485,10 +491,6 @@
 </div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-
   function acceptCookies() {
     localStorage.setItem('cookiesAccepted', '1');
     document.getElementById('cookie-banner').classList.add('hidden');

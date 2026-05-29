@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>GAZE — Коллаборации</title>
+<title>GAZE — B2B</title>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,7 +15,6 @@
     --red: #C8352A;
     --black: #0A0A0A;
     --gray: #8A8A8A;
-    --serif: Arial, sans-serif;
     --sans: Arial, sans-serif;
   }
 
@@ -44,7 +43,7 @@
   .nav-logo img { filter: invert(1); }
 
   .nav-logo {
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.25em;
@@ -72,68 +71,75 @@
   .nav-links a:hover,
   .nav-links a.active { opacity: 1; }
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-
-  /* PAGE HEADER */
-  .page-header {
-    padding: 154px 48px 60px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
-
-  .page-title {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-  }
-
-  /* COLLAB */
-  .collab-section {
-    min-height: 50vh;
-  }
-
-  .collab-list {
+  /* B2B */
+  .section-b2b {
+    background: var(--red);
+    min-height: 100vh;
+    padding: 200px 48px 120px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    list-style: none;
-  }
-
-  .collab-item {
-    padding: 40px 48px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    display: flex;
+    gap: 80px;
     align-items: center;
-    justify-content: space-between;
+    color: white;
   }
 
-  .collab-name {
-    font-size: 13px;
-    letter-spacing: 0.25em;
+  .b2b-title {
+    font-family: var(--sans);
+    font-size: clamp(60px, 9vw, 130px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
-    color: var(--black);
-    font-weight: 400;
   }
 
-  .collab-arrow {
-    font-size: 11px;
-    color: var(--gray);
-    opacity: 0;
-    transition: opacity 0.3s;
+  .b2b-text {
+    font-size: 13px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 48px;
   }
 
-  .collab-item:hover .collab-arrow {
-    opacity: 1;
+  .b2b-partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 48px;
   }
 
-  .collab-item:hover {
+  .b2b-partner {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 14px;
+    transition: all 0.2s;
     cursor: default;
   }
+
+  .b2b-partner:hover {
+    color: white;
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .b2b-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+    transition: gap 0.3s;
+  }
+
+  .b2b-cta:hover { gap: 24px; }
+  .b2b-cta::after { content: '→'; }
 
   /* FOOTER */
   footer {
@@ -353,6 +359,18 @@
 
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
 
+  /* reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   @media (max-width: 768px) {
     nav { padding: 18px 20px; gap: 12px; }
     .nav-logo img { height: 16px !important; }
@@ -360,11 +378,8 @@
     .nav-links::-webkit-scrollbar { display: none; }
     .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
 
-    .page-header { padding: 100px 20px 40px; }
-
-    .collab-list { grid-template-columns: 1fr; }
-    .collab-item { padding: 24px 20px; }
-    .collab-name { font-size: 11px; }
+    .section-b2b { padding: 120px 20px 60px; grid-template-columns: 1fr; gap: 40px; }
+    .b2b-title { font-size: 48px; }
 
     footer { padding: 48px 20px 32px; }
     .footer-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -383,51 +398,29 @@
   <ul class="nav-links">
     <li><a href="shop.html">Каталог</a></li>
     <li><a href="where.html">Где купить</a></li>
-    <li><a href="b2b.html">B2B</a></li>
-    <li><a href="collab.html" class="active">Коллаборации</a></li>
+    <li><a href="b2b.html" class="active">B2B</a></li>
+    <li><a href="collab.html">Коллаборации</a></li>
   </ul>
 </nav>
 
-<div class="page-header">
-  <div class="page-title">Коллаборации</div>
-</div>
-
-<div class="collab-section">
-  <ul class="collab-list">
-    <li class="collab-item">
-      <span class="collab-name">HOMIES</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Renegade Radio Camp</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Backyard Boxing</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Liars Collective</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">DOM RADIO</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Yandex</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">Peeks</span>
-      <span class="collab-arrow">→</span>
-    </li>
-    <li class="collab-item">
-      <span class="collab-name">hideout</span>
-      <span class="collab-arrow">→</span>
-    </li>
-  </ul>
-</div>
+<!-- B2B -->
+<section class="section-b2b">
+  <div class="b2b-title reveal">B2B</div>
+  <div class="b2b-content reveal">
+    <p class="b2b-text">Мы производим мыло, лосьоны, шампуни, диффузоры и жидкости для ароматомашин на базе ароматов из нашей коллекции. Тщательно подбираем партнёров.</p>
+    <div class="b2b-partners">
+      <div class="b2b-partner">Aster</div>
+      <div class="b2b-partner">La Virgen Moscow</div>
+      <div class="b2b-partner">Jessica Gallery</div>
+      <div class="b2b-partner">Hood Gym</div>
+      <div class="b2b-partner">Evoe Bar</div>
+      <div class="b2b-partner">Tiger Lilly</div>
+      <div class="b2b-partner">Igla</div>
+      <div class="b2b-partner">No Regrets</div>
+    </div>
+    <a href="#" class="b2b-cta">Стать партнёром</a>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -488,6 +481,7 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   function acceptCookies() {
     localStorage.setItem('cookiesAccepted', '1');

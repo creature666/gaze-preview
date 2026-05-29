@@ -271,9 +271,9 @@
 
   /* FOOTER */
   footer {
-    background: var(--black);
+    background: white;
     padding: 80px 48px 48px;
-    color: white;
+    color: var(--black);
   }
 
   .footer-grid {
@@ -281,7 +281,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     padding-bottom: 64px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
     margin-bottom: 48px;
   }
 
@@ -296,13 +296,13 @@
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: rgba(0,0,0,0.5);
     text-decoration: none;
     transition: color 0.2s;
     width: fit-content;
   }
 
-  .footer-socials a:hover { color: white; }
+  .footer-socials a:hover { color: var(--black); }
 
   .footer-newsletter-label {
     font-size: 10px;
@@ -382,31 +382,31 @@
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: rgba(0,0,0,0.5);
     text-decoration: none;
     transition: color 0.2s;
     width: fit-content;
   }
 
-  .footer-links a:hover { color: white; }
+  .footer-links a:hover { color: var(--black); }
 
   .footer-email-link {
     display: block;
     font-size: 11px;
     letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.4);
+    color: rgba(0,0,0,0.6);
     text-decoration: none;
     margin-bottom: 32px;
     transition: color 0.2s;
   }
 
-  .footer-email-link:hover { color: white; }
+  .footer-email-link:hover { color: var(--black); }
 
   .footer-requisites {
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.2);
+    color: rgba(0,0,0,0.3);
     line-height: 2;
   }
 
@@ -430,14 +430,14 @@
 
   .footer-copy {
     font-size: 10px;
-    color: rgba(255,255,255,0.2);
+    color: rgba(0,0,0,0.3);
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .footer-note {
     font-size: 9px;
-    color: rgba(255,255,255,0.12);
+    color: rgba(0,0,0,0.2);
     letter-spacing: 0.05em;
   }
 
@@ -813,6 +813,61 @@
     .cookie-banner { padding: 12px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
     .cookie-text { max-width: none; }
   }
+
+  /* EDIT MODE */
+  [data-editable="true"].editable-active {
+    cursor: grab !important;
+    background: rgba(200, 53, 42, 0.05);
+    outline: 2px dashed rgba(200, 53, 42, 0.5);
+    outline-offset: 4px;
+  }
+
+  [data-editable="true"].editable-active:hover {
+    background: rgba(200, 53, 42, 0.1);
+  }
+
+  [data-editable="true"].editable-active:active {
+    cursor: grabbing !important;
+  }
+
+  #edit-mode-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    text-transform: uppercase;
+    font-family: var(--sans);
+  }
+
+  #edit-mode-btn:hover {
+    opacity: 1 !important;
+  }
+
+  #edit-mode-info {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(200, 53, 42, 0.95);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    z-index: 999;
+    display: none;
+    font-family: monospace;
+  }
+
+  #edit-mode-info.visible {
+    display: block;
+  }
+
+  /* EDITED POSITIONS */
+  [data-name="hero-text"] { position: relative; top: -499px; left: 34px; }
 </style>
 </head>
 <body>
@@ -831,7 +886,7 @@
 <section class="hero">
   <img class="hero-bg" src="images/hero_red_mercury.jpg" alt="Red Mercury">
   <div class="hero-overlay"></div>
-  <div class="hero-content">
+  <div class="hero-content" data-editable="true" data-name="hero-text">
     <div class="hero-text">
       <p><strong>Gaze — ольфакторное бюро,</strong> основанное в 2020 году. Мы создаём уникальные ароматы и объекты интерьера. Наша цель — показать новые грани истинного гедонизма и раскрыть потенциал ваших чувств.</p>
     </div>
@@ -871,11 +926,11 @@
 
 <!-- NEW -->
 <section class="section-new">
-  <div class="section-header reveal">
+  <div class="section-header reveal" data-editable="true" data-name="section-new-header">
     <h2 class="section-title">Новинки</h2>
     <a href="shop.html" class="section-link">Весь каталог</a>
   </div>
-  <div class="products-grid reveal">
+  <div class="products-grid reveal" data-editable="true" data-name="products-grid">
     <div class="product-card">
       <div class="product-img">
         <img class="product-img-inner" src="images/c5c11ab33002019b986e5eed43823790.jpg.jpeg" alt="Troll">
@@ -950,17 +1005,6 @@
         <a href="#">Telegram</a>
         <a href="#">VK</a>
         <a href="#">MAX</a>
-      </div>
-      <div>
-        <div class="footer-newsletter-label">Рассылка</div>
-        <div class="footer-newsletter-row">
-          <input type="email" placeholder="EMAIL" class="footer-newsletter-input">
-          <button class="footer-newsletter-btn">Подписаться</button>
-        </div>
-        <label class="footer-newsletter-consent">
-          <input type="checkbox">
-          <span>Я согласен(а) на обработку персональных данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a></span>
-        </label>
       </div>
     </div>
     <div class="footer-right">
@@ -1087,6 +1131,92 @@
   if (localStorage.getItem('cookiesAccepted')) {
     document.getElementById('cookie-banner').classList.add('hidden');
   }
+
+  // ===== DEV MODE: Interactive Layout Editor =====
+  let editMode = false;
+  let draggedEl = null;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  const editableEls = document.querySelectorAll('[data-editable="true"]');
+  const infoBox = document.getElementById('edit-mode-info') || createInfoBox();
+
+  function createInfoBox() {
+    const box = document.createElement('div');
+    box.id = 'edit-mode-info';
+    box.textContent = '✏️ Click & drag to move';
+    document.body.appendChild(box);
+    return box;
+  }
+
+  function toggleEditMode() {
+    editMode = !editMode;
+
+    if (editMode) {
+      console.log('✏️ Edit mode ON — click and drag elements to move them');
+      document.body.style.cursor = 'move';
+      infoBox.classList.add('visible');
+      editableEls.forEach(el => {
+        el.style.position = 'relative';
+        el.classList.add('editable-active');
+      });
+    } else {
+      console.log('✏️ Edit mode OFF');
+      document.body.style.cursor = 'default';
+      infoBox.classList.remove('visible');
+      editableEls.forEach(el => {
+        el.classList.remove('editable-active');
+      });
+      logCSSCoordinates();
+    }
+  }
+
+  editableEls.forEach(el => {
+    el.addEventListener('mousedown', (e) => {
+      if (!editMode || e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+      e.preventDefault();
+      draggedEl = el;
+      const rect = el.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+    });
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!draggedEl || !editMode) return;
+    draggedEl.style.top = (e.clientY - offsetY) + 'px';
+    draggedEl.style.left = (e.clientX - offsetX) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    draggedEl = null;
+  });
+
+  function logCSSCoordinates() {
+    const css = [];
+    editableEls.forEach(el => {
+      const top = el.style.top;
+      const left = el.style.left;
+      const name = el.dataset.name;
+      if (top || left) {
+        css.push(`[data-name="${name}"] { position: relative; top: ${top}; left: ${left}; }`);
+      }
+    });
+
+    if (css.length > 0) {
+      console.log('📋 Copy this CSS into <style>:\n\n' + css.join('\n\n') + '\n');
+      alert('✅ Check console (F12) for CSS coordinates to copy!');
+    }
+  }
+
+  // Add Edit button to nav
+  const editBtn = document.createElement('button');
+  editBtn.id = 'edit-mode-btn';
+  editBtn.textContent = '✏️ Edit';
+  editBtn.addEventListener('click', toggleEditMode);
+
+  const nav = document.querySelector('nav');
+  nav.appendChild(editBtn);
 </script>
 </body>
 </html>

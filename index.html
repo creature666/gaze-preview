@@ -737,6 +737,48 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  @media (max-width: 768px) {
+    nav { padding: 18px 20px; }
+    .nav-logo img { height: 18px !important; }
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 9px; letter-spacing: 0.15em; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      padding-top: 100px;
+    }
+    .hero-left { padding: 40px 20px; align-items: center; }
+    .hero-right { padding: 0 20px 40px 20px; gap: 32px; }
+    .hero-text { max-width: none; }
+    .hero-text p { font-size: 11px; }
+
+    .marquee-wrap { padding: 10px 0; }
+    .marquee-track { gap: 40px; }
+
+    .section-new { padding: 60px 20px; }
+    .section-header { flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .section-about { padding: 80px 20px; grid-template-columns: 1fr; gap: 60px; }
+    .about-title { font-size: 24px; }
+    .about-text { max-width: none; }
+
+    .section-b2b { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
+    .b2b-title { font-size: 48px; }
+
+    .section-where { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
+    .where-title { position: static; }
+    .cities-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    footer { padding: 48px 20px 32px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-bottom-right { text-align: left; }
+
+    .cookie-banner { padding: 12px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .cookie-text { max-width: none; }
+  }
 </style>
 </head>
 <body>

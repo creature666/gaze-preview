@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>GAZE</title>
-<script>window.history.replaceState({},'/',window.location.hash||'/')</script>
+<script>if(window.location.hash)window.history.replaceState({},'',window.location.hash)</script>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 

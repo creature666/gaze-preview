@@ -71,25 +71,6 @@
 
   .nav-links a:hover, .nav-links a.active { opacity: 1; }
 
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-
-  .nav-cart {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-    cursor: pointer;
-  }
-
-  .nav-cart:hover { opacity: 1; }
-
   /* PAGE HEADER */
   .page-header {
     padding: 154px 48px 60px;
@@ -445,6 +426,50 @@
 
   .cart-checkout:hover { background: var(--red); }
 
+  /* FLOATING CART BUTTON */
+  .cart-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 150;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--black);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-family: var(--sans);
+  }
+
+  .cart-float:hover {
+    transform: scale(1.05);
+    background: var(--red);
+  }
+
+  .cart-float-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+  }
+
   /* TOAST */
   .toast {
     position: fixed;
@@ -730,9 +755,6 @@
     <li><a href="b2b.html">B2B</a></li>
     <li><a href="collab.html">Коллаборации</a></li>
   </ul>
-  <div class="nav-right">
-    <span class="nav-cart" onclick="toggleCart()">Корзина (<span id="cart-count">0</span>)</span>
-  </div>
 </nav>
 
 <div class="page-header">
@@ -771,6 +793,11 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<button class="cart-float" id="cart-float" onclick="toggleCart()">
+  🛍
+  <span class="cart-float-badge" id="cart-float-badge">0</span>
+</button>
 
 <footer>
   <div class="footer-grid">
@@ -975,14 +1002,16 @@ function addToCart(id) {
     cart.push({ ...product, qty: 1 });
   }
   updateCart();
+  document.getElementById('cart-overlay').classList.add('open');
+  document.getElementById('cart-sidebar').classList.add('open');
   showToast(product.name + ' добавлен в корзину');
 }
 
 function updateCart() {
   const count = cart.reduce((s, i) => s + i.qty, 0);
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  document.getElementById('cart-count').textContent = count;
   document.getElementById('cart-total').textContent = formatPrice(total);
+  document.getElementById('cart-float-badge').textContent = count;
 
   const itemsEl = document.getElementById('cart-items');
   if (cart.length === 0) {

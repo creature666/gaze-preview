@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAZE — Каталог</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FFFFFF;
+    --red: #C8352A;
+    --black: #0A0A0A;
+    --gray: #8A8A8A;
+    --serif: Arial, sans-serif;
+    --sans: Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--black);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 48px;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-cart {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-cart:hover { opacity: 1; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 140px 48px 60px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .page-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .page-count {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* FILTERS */
+  .filters {
+    padding: 24px 48px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .filter-btn {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: none;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--sans);
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--black);
+    color: white;
+    border-color: var(--black);
+  }
+
+  /* GRID */
+  .shop-grid {
+    padding: 48px 48px 120px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  /* PRODUCT CARD */
+  .product-card {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .product-card:hover .product-add {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .product-img-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #E8E3DC;
+    margin-bottom: 0;
+  }
+
+  .product-img-main,
+  .product-img-hover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease, transform 0.6s ease;
+  }
+
+  .product-img-hover {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-img-main {
+    transform: scale(1.03);
+  }
+
+  .product-card:hover .product-img-hover {
+    opacity: 1;
+  }
+
+  .product-add {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: var(--black);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--sans);
+  }
+
+  .product-add:hover {
+    background: var(--red);
+  }
+
+  .product-info {
+    padding: 16px 0 32px;
+  }
+
+  .product-tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .product-tag {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 3px 8px;
+  }
+
+  .product-name {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 4px;
+    font-weight: 400;
+  }
+
+  .product-sub {
+    font-size: 10px;
+    color: rgba(0,0,0,0.4);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .product-price {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--black);
+    letter-spacing: 0.15em;
+  }
+
+  /* CART SIDEBAR */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .cart-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .cart-sidebar {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 420px;
+    background: var(--cream);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .cart-header {
+    padding: 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .cart-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    font-family: var(--sans);
+    color: var(--black);
+  }
+
+  .cart-close:hover { opacity: 1; }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 80px 0;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .cart-item-img {
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    background: #E8E3DC;
+    width: 80px;
+  }
+
+  .cart-item-name {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-sub {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .qty-btn {
+    background: none;
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 24px; height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: var(--black);
+    font-family: var(--sans);
+  }
+
+  .qty-btn:hover { background: var(--black); color: white; border-color: var(--black); }
+
+  .qty-num {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .cart-item-price {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+  }
+
+  .cart-footer {
+    padding: 32px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+
+  .cart-total-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .cart-total-price {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+  }
+
+  .cart-checkout {
+    width: 100%;
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: var(--sans);
+    margin-bottom: 12px;
+  }
+
+  .cart-checkout:hover { background: var(--red); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--black);
+    color: white;
+    padding: 14px 24px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 300;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 80px 48px 48px;
+    color: white;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 48px;
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .footer-socials a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .footer-socials a:hover { color: white; }
+
+  .footer-newsletter-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  .footer-newsletter-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .footer-newsletter-input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    flex: 1;
+    outline: none;
+    font-family: var(--sans);
+  }
+
+  .footer-newsletter-input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .footer-newsletter-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: color 0.2s;
+    padding: 8px 0 8px 16px;
+  }
+
+  .footer-newsletter-btn:hover { color: white; }
+
+  .footer-newsletter-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    line-height: 1.6;
+  }
+
+  .footer-newsletter-consent input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: white;
+    flex-shrink: 0;
+  }
+
+  .footer-newsletter-consent a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: underline;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .footer-links a:hover { color: white; }
+
+  .footer-email-link {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+  }
+
+  .footer-email-link:hover { color: white; }
+
+  .footer-requisites {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    line-height: 2;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logo img {
+    height: clamp(36px, 5vw, 60px);
+    display: block;
+  }
+
+  .footer-bottom-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-note {
+    font-size: 9px;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.05em;
+  }
+
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--black);
+    color: white;
+    padding: 16px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 400;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+  }
+
+  .cookie-banner.hidden { transform: translateY(100%); }
+
+  .cookie-text {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+
+  .cookie-text a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: underline;
+  }
+
+  .cookie-accept {
+    background: white;
+    color: var(--black);
+    border: none;
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    white-space: nowrap;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+
+  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="shop.html" class="active">Каталог</a></li>
+    <li><a href="index.html#where">Где купить</a></li>
+    <li><a href="index.html#b2b">B2B</a></li>
+    <li><a href="#">Коллаборации</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-cart" onclick="toggleCart()">Корзина (<span id="cart-count">0</span>)</span>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-title">Каталог</h1>
+  <span class="page-count" id="product-count">11 товаров</span>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterProducts('all', this)">Все</button>
+  <button class="filter-btn" onclick="filterProducts('уход', this)">Уход</button>
+  <button class="filter-btn" onclick="filterProducts('свеча', this)">Свечи</button>
+  <button class="filter-btn" onclick="filterProducts('объект', this)">Объекты</button>
+  <button class="filter-btn" onclick="filterProducts('рефилл', this)">Рефилл</button>
+  <button class="filter-btn" onclick="filterProducts('коллаборации', this)">Коллаборации</button>
+</div>
+
+<div class="shop-grid" id="shop-grid"></div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <div class="cart-title">Корзина</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">Корзина пуста</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Итого</span>
+      <span class="cart-total-price" id="cart-total">0 ₽</span>
+    </div>
+    <button class="cart-checkout">Оформить заказ →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-left">
+      <div class="footer-socials">
+        <a href="#">Instagram*</a>
+        <a href="#">Telegram</a>
+        <a href="#">VK</a>
+        <a href="#">MAX</a>
+      </div>
+      <div>
+        <div class="footer-newsletter-label">Рассылка</div>
+        <div class="footer-newsletter-row">
+          <input type="email" placeholder="EMAIL" class="footer-newsletter-input">
+          <button class="footer-newsletter-btn">Подписаться</button>
+        </div>
+        <label class="footer-newsletter-consent">
+          <input type="checkbox">
+          <span>Я согласен(а) на обработку персональных данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a></span>
+        </label>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="delivery.html">Доставка</a>
+        <a href="payment.html">Оплата</a>
+        <a href="returns.html">Возврат и обмен</a>
+        <a href="offer.html">Публичная оферта</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="cookies.html">Cookie-политика</a>
+      </div>
+      <a href="mailto:gazeoline01@gmail.com" class="footer-email-link">gazeoline01@gmail.com</a>
+      <div class="footer-requisites">
+        © 2026 ИП Сидорова Екатерина Владимировна<br>
+        ИНН 860323391263 · ОГРНИП 323784700143353<br>
+        Дата регистрации: 02.05.2023
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo"><img src="logo.svg" alt="Gaze" style="filter:invert(1);"></div>
+    <div class="footer-bottom-right">
+      <div class="footer-copy">© 2026 Gaze · Все права защищены</div>
+      <div class="footer-note">*организация, запрещённая на территории РФ</div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-text">
+    Мы используем файлы cookie для корректной работы сайта и улучшения пользовательского опыта. Продолжая использование сайта, вы соглашаетесь с нашей <a href="cookies.html">Cookie-политикой</a> и <a href="privacy.html">Политикой конфиденциальности</a>.
+  </div>
+  <button class="cookie-accept" onclick="acceptCookies()">Принять</button>
+</div>
+
+<script>
+const PRODUCTS = [
+  {
+    id: 1,
+    name: "Мыло Angel Dust",
+    sub: "Глицериновое мыло",
+    price: 1100,
+    category: "уход",
+    img: "images/45700513.jpg.jpeg",
+    img2: "images/45700513.jpg_1.jpeg"
+  },
+  {
+    id: 2,
+    name: "Набор саше",
+    sub: "",
+    price: 1400,
+    category: "уход",
+    img: "images/ab7f466a8113592db3ba4f76c8f0cfaa.jpg.jpeg",
+    img2: "images/28475800.jpg.jpeg"
+  },
+  {
+    id: 3,
+    name: "Troll",
+    sub: "Smelly Tale × Gaze",
+    price: 3000,
+    category: "коллаборации",
+    img: "images/c5c11ab33002019b986e5eed43823790.jpg.jpeg",
+    img2: "images/9cba52ab5e3bd264c24c1d81066b78d7.jpg.jpeg"
+  },
+  {
+    id: 4,
+    name: "Шампунь Red Mercury",
+    sub: "Шампунь для волос 500 мл",
+    price: 3000,
+    category: "уход",
+    img: "images/10131750.jpg.jpeg",
+    img2: "images/10131750.jpg_1.jpeg"
+  },
+  {
+    id: 5,
+    name: "Жидкое мыло Oyster",
+    sub: "Для рук и тела 500 мл",
+    price: 3000,
+    category: "уход",
+    img: "images/12293916.jpg.jpeg",
+    img2: "images/12293916.jpg_1.jpeg"
+  },
+  {
+    id: 6,
+    name: "Жидкое мыло Red Mercury",
+    sub: "Для рук и тела 500 мл",
+    price: 3000,
+    category: "уход",
+    img: "images/13305597.jpg.jpeg",
+    img2: "images/13305597.jpg_1.jpeg"
+  },
+  {
+    id: 7,
+    name: "Кондиционер Red Mercury",
+    sub: "Кондиционер для волос 500 мл",
+    price: 3500,
+    category: "уход",
+    img: "images/42526944.jpg.jpeg",
+    img2: "images/42526944.jpg_1.jpeg"
+  },
+  {
+    id: 8,
+    name: "Лосьон Oyster",
+    sub: "Для рук и тела 500 мл",
+    price: 3500,
+    category: "уход",
+    img: "images/34397284.jpg.jpeg",
+    img2: "images/34397284.jpg_1.jpeg"
+  },
+  {
+    id: 9,
+    name: "Свеча Temple of Boxing",
+    sub: "Gaze × Backyard",
+    price: 4400,
+    category: "свеча",
+    img: "images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg",
+    img2: "images/a6909fd892a033085fe87424ec1a7a2f.jpg.jpeg"
+  },
+  {
+    id: 10,
+    name: "Лосьон Red Mercury",
+    sub: "Рефилл 5 литров",
+    price: 7500,
+    category: "рефилл",
+    img: "images/3f641a35451effc99d4337841e743778.jpg.jpeg",
+    img2: "images/3f641a35451effc99d4337841e743778.jpg_1.jpeg"
+  },
+  {
+    id: 11,
+    name: "Кондиционер Red Mercury",
+    sub: "Рефилл 5 литров",
+    price: 7500,
+    category: "рефилл",
+    img: "images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg",
+    img2: "images/8e1f856d9d6bd177067e32ed80119ed8.jpg_1.jpeg"
+  }
+];
+
+let cart = [];
+let activeFilter = 'all';
+
+function formatPrice(p) {
+  return p.toLocaleString('ru-RU') + ' ₽';
+}
+
+function renderProducts(filter) {
+  const grid = document.getElementById('shop-grid');
+  const filtered = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
+  document.getElementById('product-count').textContent = filtered.length + ' товаров';
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" data-category="${p.category}">
+      <div class="product-img-wrap">
+        <img class="product-img-main" src="${p.img}" alt="${p.name}" loading="lazy">
+        ${p.img2 ? `<img class="product-img-hover" src="${p.img2}" alt="${p.name}" loading="lazy">` : ''}
+        <button class="product-add" onclick="addToCart(${p.id})">В корзину</button>
+      </div>
+      <div class="product-info">
+        ${p.category === 'коллаборации' ? `<div class="product-tags"><span class="product-tag">Коллаб</span></div>` : ''}
+        ${p.category === 'рефилл' ? `<div class="product-tags"><span class="product-tag">Рефилл</span></div>` : ''}
+        <div class="product-name">${p.name}</div>
+        ${p.sub ? `<div class="product-sub">${p.sub}</div>` : ''}
+        <div class="product-price">${formatPrice(p.price)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(cat);
+}
+
+function addToCart(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+  updateCart();
+  showToast(product.name + ' добавлен в корзину');
+}
+
+function updateCart() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cart-count').textContent = count;
+  document.getElementById('cart-total').textContent = formatPrice(total);
+
+  const itemsEl = document.getElementById('cart-items');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+    return;
+  }
+
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-sub">${item.sub || ''}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+      </div>
+      <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
+    </div>
+  `).join('');
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+  updateCart();
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const sidebar = document.getElementById('cart-sidebar');
+  overlay.classList.toggle('open');
+  sidebar.classList.toggle('open');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+renderProducts('all');
+
+function acceptCookies() {
+  localStorage.setItem('cookiesAccepted', '1');
+  document.getElementById('cookie-banner').classList.add('hidden');
+}
+
+if (localStorage.getItem('cookiesAccepted')) {
+  document.getElementById('cookie-banner').classList.add('hidden');
+}
+</script>
+</body>
+</html>

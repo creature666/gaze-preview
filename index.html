@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAZE</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FFFFFF;
+    --red: #C8352A;
+    --black: #0A0A0A;
+    --gray: #8A8A8A;
+    --serif: Arial, sans-serif;
+    --sans: Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--black);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 48px;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-cart {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.6;
+  }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    align-items: flex-end;
+    padding: 80px 48px;
+  }
+
+  .hero-title {
+    margin: 0;
+  }
+
+  .hero-title img {
+    width: clamp(200px, 28vw, 420px);
+    display: block;
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 48px 80px 0;
+    gap: 48px;
+  }
+
+  .hero-text {
+    max-width: 380px;
+  }
+
+  .hero-text p {
+    font-size: 13px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.7;
+  }
+
+  .hero-text strong {
+    opacity: 1;
+    font-weight: 500;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 4px;
+    transition: gap 0.3s;
+    width: fit-content;
+  }
+
+  .hero-cta:hover { gap: 24px; }
+
+  .hero-cta::after { content: '→'; }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,0.12);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    padding: 14px 0;
+    background: var(--cream);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 80px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* NEW */
+  .section-new {
+    background: var(--black);
+    padding: 120px 48px;
+    color: white;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 72px;
+  }
+
+  .section-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .section-link {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-link:hover { color: white; }
+  .section-link::after { content: '→'; }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .product-card {
+    cursor: pointer;
+    group: true;
+  }
+
+  .product-img {
+    aspect-ratio: 3/4;
+    background: #1A1A1A;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .product-img-inner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: transform 0.6s ease, filter 0.6s ease;
+  }
+
+  .product-card:hover .product-img-inner {
+    transform: scale(1.04);
+    filter: grayscale(0%);
+  }
+
+  /* Placeholders for images */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img-p1 { background: linear-gradient(135deg, #2A2020 0%, #1A1A2A 100%); }
+  .img-p2 { background: linear-gradient(135deg, #C8352A22 0%, #1A1A1A 100%); }
+  .img-p3 { background: linear-gradient(135deg, #1A2A2A 0%, #2A1A2A 100%); }
+  .img-p4 { background: linear-gradient(135deg, #202A1A 0%, #1A1A1A 100%); }
+
+  .img-label {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.06);
+    position: absolute;
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+
+  .product-name {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 6px;
+  }
+
+  .product-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .product-price {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ABOUT */
+  .section-about {
+    padding: 160px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+  }
+
+  .about-visual {
+    aspect-ratio: 4/5;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-visual-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #1A1A1A 0%, #0A0A0A 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-glyph {
+    font-family: var(--serif);
+    font-size: 280px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .about-year {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .about-content {}
+
+  .about-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .about-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gray);
+  }
+
+  .about-title {
+    font-family: var(--sans);
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .about-title em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .about-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(0,0,0,0.6);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    max-width: 420px;
+  }
+
+  /* B2B */
+  .section-b2b {
+    background: var(--red);
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    color: white;
+  }
+
+  .b2b-title {
+    font-family: var(--sans);
+    font-size: clamp(60px, 9vw, 130px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .b2b-content {}
+
+  .b2b-text {
+    font-size: 13px;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 48px;
+  }
+
+  .b2b-partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 48px;
+  }
+
+  .b2b-partner {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 14px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .b2b-partner:hover {
+    color: white;
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .b2b-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+    transition: gap 0.3s;
+  }
+
+  .b2b-cta:hover { gap: 24px; }
+  .b2b-cta::after { content: '→'; }
+
+  /* WHERE */
+  .section-where {
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+
+  .where-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+
+  .cities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px 80px;
+  }
+
+  .city-block {}
+
+  .city-name {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  .city-locations {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .city-locations li {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 12px;
+  }
+
+  .city-locations li span {
+    display: block;
+    font-size: 10px;
+    color: rgba(0,0,0,0.3);
+    margin-top: 4px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 80px 48px 48px;
+    color: white;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 48px;
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .footer-socials a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .footer-socials a:hover { color: white; }
+
+  .footer-newsletter-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  .footer-newsletter-row {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 12px;
+  }
+
+  .footer-newsletter-input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    flex: 1;
+    outline: none;
+    font-family: var(--sans);
+  }
+
+  .footer-newsletter-input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .footer-newsletter-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: color 0.2s;
+    padding: 8px 0 8px 16px;
+  }
+
+  .footer-newsletter-btn:hover { color: white; }
+
+  .footer-newsletter-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    line-height: 1.6;
+  }
+
+  .footer-newsletter-consent input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: white;
+    flex-shrink: 0;
+  }
+
+  .footer-newsletter-consent a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: underline;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .footer-links a:hover { color: white; }
+
+  .footer-email-link {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+  }
+
+  .footer-email-link:hover { color: white; }
+
+  .footer-requisites {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    line-height: 2;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logo img {
+    height: clamp(36px, 5vw, 60px);
+    display: block;
+  }
+
+  .footer-bottom-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-note {
+    font-size: 9px;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.05em;
+  }
+
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--black);
+    color: white;
+    padding: 16px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 400;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.4s ease;
+  }
+
+  .cookie-banner.hidden { transform: translateY(100%); }
+
+  .cookie-text {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+
+  .cookie-text a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+
+  .cookie-accept {
+    background: white;
+    color: var(--black);
+    border: none;
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="#">Каталог</a></li>
+    <li><a href="#">Где купить</a></li>
+    <li><a href="#">B2B</a></li>
+    <li><a href="#">Коллаборации</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-cart">Корзина (0)</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title"><img src="logo.svg" alt="Gaze"></h1>
+  </div>
+  <div class="hero-right">
+    <div class="hero-text">
+      <p><strong>Gaze — ольфакторное бюро,</strong> основанное в 2020 году. Мы создаём уникальные ароматы и объекты интерьера. Наша цель — показать новые грани истинного гедонизма и раскрыть потенциал ваших чувств.</p>
+    </div>
+    <a href="#" class="hero-cta">Смотреть каталог</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Ароматы</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Свечи</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Диффузоры</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Уход</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Коллаборации</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">B2B</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Ароматы</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Свечи</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Диффузоры</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Уход</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Коллаборации</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">B2B</span>
+    <span class="marquee-item">·</span>
+  </div>
+</div>
+
+<!-- NEW -->
+<section class="section-new">
+  <div class="section-header reveal">
+    <h2 class="section-title">Новинки</h2>
+    <a href="#" class="section-link">Весь каталог</a>
+  </div>
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <div class="product-img">
+        <div class="img-placeholder img-p1">
+          <span class="img-label">G</span>
+        </div>
+      </div>
+      <div class="product-name">Troll</div>
+      <div class="product-sub">Smelly Tale × Gaze</div>
+      <div class="product-price">3 000 ₽</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="img-placeholder img-p2">
+          <span class="img-label">A</span>
+        </div>
+      </div>
+      <div class="product-name">Temple of Boxing</div>
+      <div class="product-sub">Свеча</div>
+      <div class="product-price">4 400 ₽</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="img-placeholder img-p3">
+          <span class="img-label">Z</span>
+        </div>
+      </div>
+      <div class="product-name">Лосьон Red Mercury</div>
+      <div class="product-sub">Рефилл 5 литров</div>
+      <div class="product-price">7 500 ₽</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="img-placeholder img-p4">
+          <span class="img-label">E</span>
+        </div>
+      </div>
+      <div class="product-name">Кондиционер Red Mercury</div>
+      <div class="product-sub">Рефилл 5 литров</div>
+      <div class="product-price">7 500 ₽</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section-about">
+  <div class="about-visual reveal">
+    <div class="about-visual-inner">
+      <span class="about-glyph">G</span>
+    </div>
+    <div class="about-year">Est. 2020 — Санкт-Петербург</div>
+  </div>
+  <div class="about-content reveal">
+    <div class="about-label">О нас</div>
+    <h2 class="about-title">Новые грани<br><em>истинного</em><br>гедонизма</h2>
+    <p class="about-text">Мы создаём уникальные ароматы и объекты интерьера, которые раскрывают потенциал ваших чувств. Каждый продукт — это манифест свободы восприятия.</p>
+  </div>
+</section>
+
+<!-- B2B -->
+<section class="section-b2b">
+  <div class="b2b-title reveal">B2B</div>
+  <div class="b2b-content reveal">
+    <p class="b2b-text">Мы производим мыло, лосьоны, шампуни, диффузоры и жидкости для ароматомашин на базе ароматов из нашей коллекции. Тщательно подбираем партнёров.</p>
+    <div class="b2b-partners">
+      <div class="b2b-partner">Aster</div>
+      <div class="b2b-partner">La Virgen Moscow</div>
+      <div class="b2b-partner">Jessica Gallery</div>
+      <div class="b2b-partner">Hood Gym</div>
+      <div class="b2b-partner">Evoe Bar</div>
+      <div class="b2b-partner">Tiger Lilly</div>
+      <div class="b2b-partner">Igla</div>
+      <div class="b2b-partner">No Regrets</div>
+    </div>
+    <a href="#" class="b2b-cta">Стать партнёром</a>
+  </div>
+</section>
+
+<!-- WHERE -->
+<section class="section-where">
+  <div>
+    <h2 class="where-title reveal">Где<br>купить</h2>
+  </div>
+  <div class="cities-grid">
+    <div class="city-block reveal">
+      <div class="city-name">Санкт-Петербург</div>
+      <ul class="city-locations">
+        <li>Tiger Lily <span>Итальянская ул., 19, ТЦ Пассаж, 52–54</span></li>
+        <li>Studio Slow <span>Барочная ул., 6с1</span></li>
+        <li>Время Перемен Home <span>Новая Голландия, 2 этаж</span></li>
+        <li>Hood Gym <span>Дегтярный пер., 26</span></li>
+      </ul>
+    </div>
+    <div class="city-block reveal">
+      <div class="city-name">Москва</div>
+      <ul class="city-locations">
+        <li>Локалы</li>
+        <li>NUW.STORE <span>Flacon</span></li>
+        <li>Studio Slow <span>Хлебозавод</span></li>
+        <li>Fashion Rebels <span>Петровка, 15</span></li>
+        <li>WILDHORN <span>Последний переулок, 25к2</span></li>
+      </ul>
+    </div>
+    <div class="city-block reveal">
+      <div class="city-name">Казань</div>
+      <ul class="city-locations">
+        <li>Studio Slow <span>ул. Островского, 98</span></li>
+        <li>Studio Slow <span>ул. Чернышевского, 27</span></li>
+      </ul>
+    </div>
+    <div class="city-block reveal">
+      <div class="city-name">Махачкала</div>
+      <ul class="city-locations">
+        <li>—</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-left">
+      <div class="footer-socials">
+        <a href="#">Instagram*</a>
+        <a href="#">Telegram</a>
+        <a href="#">VK</a>
+        <a href="#">MAX</a>
+      </div>
+      <div>
+        <div class="footer-newsletter-label">Рассылка</div>
+        <div class="footer-newsletter-row">
+          <input type="email" placeholder="EMAIL" class="footer-newsletter-input">
+          <button class="footer-newsletter-btn">Подписаться</button>
+        </div>
+        <label class="footer-newsletter-consent">
+          <input type="checkbox">
+          <span>Я согласен(а) на обработку персональных данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a></span>
+        </label>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="delivery.html">Доставка</a>
+        <a href="payment.html">Оплата</a>
+        <a href="returns.html">Возврат и обмен</a>
+        <a href="offer.html">Публичная оферта</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="cookies.html">Cookie-политика</a>
+      </div>
+      <a href="mailto:gazeoline01@gmail.com" class="footer-email-link">gazeoline01@gmail.com</a>
+      <div class="footer-requisites">
+        © 2026 ИП Сидорова Екатерина Владимировна<br>
+        ИНН 860323391263 · ОГРНИП 323784700143353<br>
+        Дата регистрации: 02.05.2023
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo"><img src="logo.svg" alt="Gaze" style="filter:invert(1);"></div>
+    <div class="footer-bottom-right">
+      <div class="footer-copy">© 2026 Gaze · Все права защищены</div>
+      <div class="footer-note">*организация, запрещённая на территории РФ</div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-text">
+    Мы используем файлы cookie для корректной работы сайта и улучшения пользовательского опыта. Продолжая использование сайта, вы соглашаетесь с нашей <a href="cookies.html">Cookie-политикой</a> и <a href="privacy.html">Политикой конфиденциальности</a>.
+  </div>
+  <button class="cookie-accept" onclick="acceptCookies()">Принять</button>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  function acceptCookies() {
+    localStorage.setItem('cookiesAccepted', '1');
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+  if (localStorage.getItem('cookiesAccepted')) {
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+</script>
+</body>
+</html>

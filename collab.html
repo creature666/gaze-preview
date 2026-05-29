@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>GAZE — Коллаборации</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FFFFFF;
+    --red: #C8352A;
+    --black: #0A0A0A;
+    --gray: #8A8A8A;
+    --serif: Arial, sans-serif;
+    --sans: Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--black);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 42px 48px;
+    background: var(--black);
+  }
+
+  .nav-logo img { filter: invert(1); }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { opacity: 1; }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 154px 48px 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .page-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  /* COLLAB */
+  .collab-section {
+    min-height: 50vh;
+  }
+
+  .collab-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    list-style: none;
+  }
+
+  .collab-item {
+    padding: 40px 48px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .collab-name {
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    font-weight: 400;
+  }
+
+  .collab-arrow {
+    font-size: 11px;
+    color: var(--gray);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .collab-item:hover .collab-arrow {
+    opacity: 1;
+  }
+
+  .collab-item:hover {
+    cursor: default;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 80px 48px 48px;
+    color: white;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 48px;
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .footer-socials a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .footer-socials a:hover { color: white; }
+
+  .footer-newsletter-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+
+  .footer-newsletter-row {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 12px;
+  }
+
+  .footer-newsletter-input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    flex: 1;
+    outline: none;
+    font-family: var(--sans);
+  }
+
+  .footer-newsletter-input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .footer-newsletter-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: color 0.2s;
+    padding: 8px 0 8px 16px;
+  }
+
+  .footer-newsletter-btn:hover { color: white; }
+
+  .footer-newsletter-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    line-height: 1.6;
+  }
+
+  .footer-newsletter-consent input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: white;
+    flex-shrink: 0;
+  }
+
+  .footer-newsletter-consent a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: underline;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .footer-links a:hover { color: white; }
+
+  .footer-email-link {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+  }
+
+  .footer-email-link:hover { color: white; }
+
+  .footer-requisites {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    line-height: 2;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logo img {
+    height: clamp(36px, 5vw, 60px);
+    display: block;
+  }
+
+  .footer-bottom-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-note {
+    font-size: 9px;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.05em;
+  }
+
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--black);
+    color: white;
+    padding: 16px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 400;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.4s ease;
+  }
+
+  .cookie-banner.hidden { transform: translateY(100%); }
+
+  .cookie-text {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+
+  .cookie-text a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+
+  .cookie-accept {
+    background: white;
+    color: var(--black);
+    border: none;
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
+
+  @media (max-width: 768px) {
+    nav { padding: 18px 20px; gap: 12px; }
+    .nav-logo img { height: 16px !important; }
+    .nav-links { gap: 14px; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
+
+    .page-header { padding: 100px 20px 40px; }
+
+    .collab-list { grid-template-columns: 1fr; }
+    .collab-item { padding: 24px 20px; }
+    .collab-name { font-size: 11px; }
+
+    footer { padding: 48px 20px 32px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-bottom-right { text-align: left; }
+
+    .cookie-banner { padding: 12px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .cookie-text { max-width: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="shop.html">Каталог</a></li>
+    <li><a href="./#where">Где купить</a></li>
+    <li><a href="./#b2b">B2B</a></li>
+    <li><a href="collab.html" class="active">Коллаборации</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-title">Коллаборации</div>
+</div>
+
+<div class="collab-section">
+  <ul class="collab-list">
+    <li class="collab-item">
+      <span class="collab-name">HOMIES</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">Renegade Radio Camp</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">Backyard Boxing</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">Liars Collective</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">DOM RADIO</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">Yandex</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">Peeks</span>
+      <span class="collab-arrow">→</span>
+    </li>
+    <li class="collab-item">
+      <span class="collab-name">hideout</span>
+      <span class="collab-arrow">→</span>
+    </li>
+  </ul>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-left">
+      <div class="footer-socials">
+        <a href="#">Instagram*</a>
+        <a href="#">Telegram</a>
+        <a href="#">VK</a>
+        <a href="#">MAX</a>
+      </div>
+      <div>
+        <div class="footer-newsletter-label">Рассылка</div>
+        <div class="footer-newsletter-row">
+          <input type="email" placeholder="EMAIL" class="footer-newsletter-input">
+          <button class="footer-newsletter-btn">Подписаться</button>
+        </div>
+        <label class="footer-newsletter-consent">
+          <input type="checkbox">
+          <span>Я согласен(а) на обработку персональных данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a></span>
+        </label>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="delivery.html">Доставка</a>
+        <a href="payment.html">Оплата</a>
+        <a href="returns.html">Возврат и обмен</a>
+        <a href="offer.html">Публичная оферта</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="cookies.html">Cookie-политика</a>
+      </div>
+      <a href="mailto:gazeoline01@gmail.com" class="footer-email-link">gazeoline01@gmail.com</a>
+      <div class="footer-requisites">
+        © 2026 ИП Сидорова Екатерина Владимировна<br>
+        ИНН 860323391263 · ОГРНИП 323784700143353<br>
+        Дата регистрации: 02.05.2023
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo"><img src="logo.svg" alt="Gaze" style="filter:invert(1);"></div>
+    <div class="footer-bottom-right">
+      <div class="footer-copy">© 2026 Gaze · Все права защищены</div>
+      <div class="footer-note">*организация, запрещённая на территории РФ</div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-text">
+    Мы используем файлы cookie для корректной работы сайта и улучшения пользовательского опыта. Продолжая использование сайта, вы соглашаетесь с нашей <a href="cookies.html">Cookie-политикой</a> и <a href="privacy.html">Политикой конфиденциальности</a>.
+  </div>
+  <button class="cookie-accept" onclick="acceptCookies()">Принять</button>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  function acceptCookies() {
+    localStorage.setItem('cookiesAccepted', '1');
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+
+  if (localStorage.getItem('cookiesAccepted')) {
+    document.getElementById('cookie-banner').classList.add('hidden');
+  }
+</script>
+
+</body>
+</html>

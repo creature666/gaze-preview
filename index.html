@@ -72,7 +72,7 @@
     transition: opacity 0.2s;
   }
 
-  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
 
   .nav-right {
     display: flex;
@@ -503,6 +503,246 @@
 
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
 
+  /* CART SIDEBAR */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .cart-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .cart-sidebar {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 420px;
+    background: var(--cream);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .cart-header {
+    padding: 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .cart-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    font-family: var(--sans);
+    color: var(--black);
+  }
+
+  .cart-close:hover { opacity: 1; }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 80px 0;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .cart-item-img {
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    background: #E8E3DC;
+    width: 80px;
+  }
+
+  .cart-item-name {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-sub {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .qty-btn {
+    background: none;
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 24px; height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: var(--black);
+    font-family: var(--sans);
+  }
+
+  .qty-btn:hover { background: var(--black); color: white; border-color: var(--black); }
+
+  .qty-num {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .cart-item-price {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+  }
+
+  .cart-footer {
+    padding: 32px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+
+  .cart-total-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .cart-total-price {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+  }
+
+  .cart-checkout {
+    width: 100%;
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: var(--sans);
+    margin-bottom: 12px;
+  }
+
+  .cart-checkout:hover { background: var(--red); }
+
+  /* PRODUCT ADD BUTTON (homepage) */
+  .product-add {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: var(--black);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--sans);
+  }
+
+  .product-add:hover {
+    background: var(--red);
+  }
+
+  .product-card:hover .product-add {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--black);
+    color: white;
+    padding: 14px 24px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 300;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   /* Scroll reveal */
   .reveal {
     opacity: 0;
@@ -522,6 +762,8 @@
     .nav-links::-webkit-scrollbar { display: none; }
     .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
     .nav-cart { font-size: 8px; }
+
+    .cart-sidebar { width: 100%; }
 
     .hero {
       grid-template-columns: 1fr;
@@ -560,7 +802,7 @@
     <li><a href="collab.html">Коллаборации</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#" class="nav-cart">Корзина (0)</a>
+    <span class="nav-cart" onclick="toggleCart()">Корзина (<span id="cart-count">0</span>)</span>
   </div>
 </nav>
 
@@ -623,6 +865,7 @@
     <div class="product-card">
       <div class="product-img">
         <img class="product-img-inner" src="images/c5c11ab33002019b986e5eed43823790.jpg.jpeg" alt="Troll">
+        <button class="product-add" onclick="addToCart(3)">В корзину</button>
       </div>
       <div class="product-name">Troll</div>
       <div class="product-sub">Smelly Tale × Gaze</div>
@@ -631,6 +874,7 @@
     <div class="product-card">
       <div class="product-img">
         <img class="product-img-inner" src="images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg" alt="Свеча Temple of Boxing">
+        <button class="product-add" onclick="addToCart(9)">В корзину</button>
       </div>
       <div class="product-name">Temple of Boxing</div>
       <div class="product-sub">Свеча · Gaze × Backyard</div>
@@ -639,6 +883,7 @@
     <div class="product-card">
       <div class="product-img">
         <img class="product-img-inner" src="images/3f641a35451effc99d4337841e743778.jpg.jpeg" alt="Лосьон Red Mercury">
+        <button class="product-add" onclick="addToCart(10)">В корзину</button>
       </div>
       <div class="product-name">Лосьон Red Mercury</div>
       <div class="product-sub">Рефилл 5 литров</div>
@@ -647,6 +892,7 @@
     <div class="product-card">
       <div class="product-img">
         <img class="product-img-inner" src="images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg" alt="Кондиционер Red Mercury">
+        <button class="product-add" onclick="addToCart(11)">В корзину</button>
       </div>
       <div class="product-name">Кондиционер Red Mercury</div>
       <div class="product-sub">Рефилл 5 литров</div>
@@ -654,6 +900,27 @@
     </div>
   </div>
 </section>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <div class="cart-title">Корзина</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">Корзина пуста</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Итого</span>
+      <span class="cart-total-price" id="cart-total">0 ₽</span>
+    </div>
+    <button class="cart-checkout">Оформить заказ →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <!-- FOOTER -->
 <footer>
@@ -711,6 +978,81 @@
 </div>
 
 <script>
+  const FEATURED = [
+    { id: 3, name: "Troll", sub: "Smelly Tale × Gaze", price: 3000, img: "images/c5c11ab33002019b986e5eed43823790.jpg.jpeg" },
+    { id: 9, name: "Temple of Boxing", sub: "Свеча · Gaze × Backyard", price: 4400, img: "images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg" },
+    { id: 10, name: "Лосьон Red Mercury", sub: "Рефилл 5 литров", price: 7500, img: "images/3f641a35451effc99d4337841e743778.jpg.jpeg" },
+    { id: 11, name: "Кондиционер Red Mercury", sub: "Рефилл 5 литров", price: 7500, img: "images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg" }
+  ];
+
+  let cart = [];
+
+  function formatPrice(p) {
+    return p.toLocaleString('ru-RU') + ' ₽';
+  }
+
+  function addToCart(id) {
+    const product = FEATURED.find(p => p.id === id);
+    if (!product) return;
+    const existing = cart.find(i => i.id === id);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+    updateCart();
+    showToast(product.name + ' добавлен в корзину');
+  }
+
+  function updateCart() {
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cart-count').textContent = count;
+    document.getElementById('cart-total').textContent = formatPrice(total);
+
+    const itemsEl = document.getElementById('cart-items');
+    if (cart.length === 0) {
+      itemsEl.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+      return;
+    }
+    itemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-sub">${item.sub || ''}</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+        </div>
+        <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
+      </div>
+    `).join('');
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    updateCart();
+  }
+
+  function toggleCart() {
+    document.getElementById('cart-overlay').classList.toggle('open');
+    document.getElementById('cart-sidebar').classList.toggle('open');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });

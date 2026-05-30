@@ -292,7 +292,7 @@
     text-transform: uppercase;
     color: white;
     opacity: 0.85;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
   }
 
   .description-text strong {
@@ -311,7 +311,7 @@
 
   .marquee-track {
     display: flex;
-    gap: 80px;
+    gap: 40px;
     animation: marquee 20s linear infinite;
     white-space: nowrap;
   }
@@ -430,25 +430,24 @@
 
   /* FOOTER */
   footer {
-    background: white;
-    padding: 80px 48px 48px;
+    padding: 48px 48px 32px;
     color: var(--black);
   }
 
   .footer-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    padding-bottom: 64px;
+    gap: 40px;
+    padding-bottom: 32px;
     border-bottom: 1px solid rgba(0,0,0,0.12);
-    margin-bottom: 48px;
+    margin-bottom: 24px;
   }
 
   .footer-socials {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
   }
 
   .footer-socials a {
@@ -498,8 +497,14 @@
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(0,0,0,0.3);
-    line-height: 2;
+    color: rgba(0,0,0,0.3); text-decoration: none;
+    line-height: 1.5;
+  }
+
+  .footer-requisites a {
+    color: inherit;
+    text-decoration: none;
+    cursor: text;
   }
 
   .footer-bottom {

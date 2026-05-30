@@ -14,8 +14,14 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: center;
-    padding: 0 48px; height: 106px; background: var(--black);
-  }
+    padding: 0 48px; height: 106px; background: rgba(23, 23, 23, 0.75);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 20px rgba(200, 150, 255, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.2);  }
   .nav-logo { position: absolute; left: 48px; }
   .nav-logo img { height: 22px; display: block; filter: invert(1); }
   .nav-links { display: flex; gap: 40px; list-style: none; }
@@ -133,7 +139,7 @@
 </head>
 <body>
 <nav>
-  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
+  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
   <ul class="nav-links">
     <li><a href="shop.html">Каталог</a></li>
     <li><a href="where.html">Где купить</a></li>

@@ -38,8 +38,14 @@
     align-items: center;
     justify-content: center;
     padding: 0 48px; height: 106px;
-    background: var(--black);
-  }
+    background: rgba(23, 23, 23, 0.75);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 20px rgba(200, 150, 255, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.2);  }
 
   .nav-logo img { filter: invert(1); }
 
@@ -620,12 +626,256 @@
     color: rgba(255,255,255,0.12);
     letter-spacing: 0.05em;
   }
+
+  /* PRODUCT MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .modal.open {
+    display: flex;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  .modal-content {
+    background: white;
+    position: relative;
+    z-index: 501;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--black);
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 502;
+    transition: opacity 0.2s;
+    font-family: var(--sans);
+  }
+
+  .modal-close:hover { opacity: 0.5; }
+
+  .modal-images {
+    position: relative;
+    background: #f5f5f5;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .modal-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .modal-image-counter {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+
+  .modal-image-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .modal-image-nav button {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 2px;
+    pointer-events: all;
+    transition: background 0.2s;
+    font-family: var(--sans);
+  }
+
+  .modal-image-nav button:hover { background: rgba(0, 0, 0, 0.6); }
+
+  .modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .modal-sub {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+  }
+
+  .modal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal-detail-item {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .modal-description {
+    font-size: 12px;
+    line-height: 1.8;
+    color: rgba(0, 0, 0, 0.65);
+    letter-spacing: 0.04em;
+  }
+
+  .modal-notes-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 20px;
+  }
+
+  .modal-notes-section h3 {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--black);
+    font-weight: 400;
+  }
+
+  .modal-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .modal-note-tag {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 6px 12px;
+    border-radius: 2px;
+    color: var(--gray);
+  }
+
+  .modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .modal-sku {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .modal-price {
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    color: var(--black);
+  }
+
+  .modal-add-btn {
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: var(--sans);
+  }
+
+  .modal-add-btn:hover { background: var(--red); }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 20px;
+    }
+
+    .modal-header h2 {
+      font-size: 14px;
+    }
+
+    .modal-images {
+      aspect-ratio: 3/4;
+    }
+  }
+
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:22px;display:block;"></a>
+  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
   <ul class="nav-links">
     <li><a href="shop.html" class="active">Каталог</a></li>
     <li><a href="where.html">Где купить</a></li>
@@ -724,7 +974,10 @@ const PRODUCTS = [
     price: 1100,
     category: "уход",
     img: "images/45700513.jpg.jpeg",
-    img2: "images/45700513.jpg_1.jpeg"
+    img2: "images/45700513.jpg_1.jpeg",
+    description: "Натуральное глицериновое мыло с нежным ароматом. Деликатное очищение для чувствительной кожи. Увлажняющая формула сохраняет естественный баланс кожи.",
+    details: ["Глицериновое мыло", "100% натуральный состав"],
+    notes: ["Мягкий аромат", "Увлажнение"]
   },
   {
     id: 2,
@@ -733,7 +986,10 @@ const PRODUCTS = [
     price: 1400,
     category: "уход",
     img: "images/ab7f466a8113592db3ba4f76c8f0cfaa.jpg.jpeg",
-    img2: "images/28475800.jpg.jpeg"
+    img2: "images/28475800.jpg.jpeg",
+    description: "Ароматические саше для дома и автомобиля. Комплект из нескольких видов с разными ароматами. Долгостойкий запах сохраняется до 6 недель.",
+    details: ["Набор саше", "Для дома и авто"],
+    notes: ["Долгостойкость", "Натуральные ароматы"]
   },
   {
     id: 3,
@@ -742,7 +998,11 @@ const PRODUCTS = [
     price: 3000,
     category: "коллаборации",
     img: "images/c5c11ab33002019b986e5eed43823790.jpg.jpeg",
-    img2: "images/9cba52ab5e3bd264c24c1d81066b78d7.jpg.jpeg"
+    img2: "images/9cba52ab5e3bd264c24c1d81066b78d7.jpg.jpeg",
+    description: "Уникальное ароматическое изделие в сотрудничестве Smelly Tale и Gaze. Специальная серия с интересным дизайном и оригинальным ароматическим профилем. Ограниченный выпуск.",
+    details: ["Коллаборация Smelly Tale × Gaze", "Ограниченный выпуск", "Авторский дизайн"],
+    notes: ["Амбра", "Мускус", "Восточные ноты"],
+    sku: "300"
   },
   {
     id: 4,
@@ -751,7 +1011,10 @@ const PRODUCTS = [
     price: 3000,
     category: "уход",
     img: "images/10131750.jpg.jpeg",
-    img2: "images/10131750.jpg_1.jpeg"
+    img2: "images/10131750.jpg_1.jpeg",
+    description: "Профессиональный шампунь серии Red Mercury. Обогащён натуральными экстрактами и эфирными маслами. Придаёт волосам блеск и объём. Подходит для всех типов волос.",
+    details: ["Шампунь 500 мл", "Натуральные компоненты", "Для всех типов волос"],
+    notes: ["Восстановление", "Блеск и объём"]
   },
   {
     id: 5,
@@ -760,7 +1023,10 @@ const PRODUCTS = [
     price: 3000,
     category: "уход",
     img: "images/12293916.jpg.jpeg",
-    img2: "images/12293916.jpg_1.jpeg"
+    img2: "images/12293916.jpg_1.jpeg",
+    description: "Мягкое жидкое мыло серии Oyster. Превосходно очищает и увлажняет кожу. Деликатная формула с экстрактом жемчуга. Приятный аромат на весь день.",
+    details: ["Жидкое мыло 500 мл", "Для рук и тела", "С экстрактом жемчуга"],
+    notes: ["Мягкое очищение", "Увлажнение"]
   },
   {
     id: 6,
@@ -769,7 +1035,10 @@ const PRODUCTS = [
     price: 3000,
     category: "уход",
     img: "images/13305597.jpg.jpeg",
-    img2: "images/13305597.jpg_1.jpeg"
+    img2: "images/13305597.jpg_1.jpeg",
+    description: "Жидкое мыло серии Red Mercury с энергичным ароматом. Быстрое и эффективное очищение для кожи рук и тела. Питающая формула с натуральными ингредиентами.",
+    details: ["Жидкое мыло 500 мл", "Для рук и тела", "Red Mercury"],
+    notes: ["Энергичный аромат", "Питание", "Мягкая очистка"]
   },
   {
     id: 7,
@@ -778,7 +1047,10 @@ const PRODUCTS = [
     price: 3500,
     category: "уход",
     img: "images/42526944.jpg.jpeg",
-    img2: "images/42526944.jpg_1.jpeg"
+    img2: "images/42526944.jpg_1.jpeg",
+    description: "Кондиционер серии Red Mercury для ухода после шампуня. Содержит витамины и масла, восстанавливающие структуру волос. Облегчает расчёсывание и придаёт мягкость.",
+    details: ["Кондиционер 500 мл", "Red Mercury", "Восстанавливающий"],
+    notes: ["Мягкость волос", "Восстановление", "Витамины и масла"]
   },
   {
     id: 8,
@@ -787,7 +1059,10 @@ const PRODUCTS = [
     price: 3500,
     category: "уход",
     img: "images/34397284.jpg.jpeg",
-    img2: "images/34397284.jpg_1.jpeg"
+    img2: "images/34397284.jpg_1.jpeg",
+    description: "Питательный лосьон серии Oyster для рук и тела. Быстро впитывается, оставляя кожу мягкой и увлажнённой. Содержит экстракт жемчуга и натуральные масла.",
+    details: ["Лосьон 500 мл", "Для рук и тела", "Oyster"],
+    notes: ["Питание", "Увлажнение", "Шелковистость"]
   },
   {
     id: 9,
@@ -796,7 +1071,11 @@ const PRODUCTS = [
     price: 4400,
     category: "свеча",
     img: "images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg",
-    img2: "images/a6909fd892a033085fe87424ec1a7a2f.jpg.jpeg"
+    img2: "images/a6909fd892a033085fe87424ec1a7a2f.jpg.jpeg",
+    description: "Ограниченный выпуск свечи в сотрудничестве с Backyard. Аромат вдохновлён тайским боксом и сочетает ладан, бергамот, лаванду и секретный зелёный ингредиент (разрешён в Таиланде). Долгостойкая свеча премиум-качества.",
+    details: ["Коллаборация Gaze × Backyard", "Ограниченный выпуск", "Восточные ароматы", "Свеча 200г"],
+    notes: ["Ладан", "Бергамот", "Лаванда", "Зелёные ноты"],
+    sku: "560"
   },
   {
     id: 10,
@@ -805,7 +1084,10 @@ const PRODUCTS = [
     price: 7500,
     category: "рефилл",
     img: "images/3f641a35451effc99d4337841e743778.jpg.jpeg",
-    img2: "images/3f641a35451effc99d4337841e743778.jpg_1.jpeg"
+    img2: "images/3f641a35451effc99d4337841e743778.jpg_1.jpeg",
+    description: "Рефилл лосьона Red Mercury в большом объёме 5 литров. Идеален для салонов красоты и постоянных пользователей. Профессиональное качество по доступной цене. Быстрая доставка.",
+    details: ["Рефилл 5 литров", "Red Mercury", "Для профессионального использования", "Экономичный объём"],
+    notes: ["Питание", "Увлажнение", "Восстановление"]
   },
   {
     id: 11,
@@ -814,7 +1096,10 @@ const PRODUCTS = [
     price: 7500,
     category: "рефилл",
     img: "images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg",
-    img2: "images/8e1f856d9d6bd177067e32ed80119ed8.jpg_1.jpeg"
+    img2: "images/8e1f856d9d6bd177067e32ed80119ed8.jpg_1.jpeg",
+    description: "Рефилл кондиционера Red Mercury объёмом 5 литров. Профессиональное средство для восстановления волос. Экономичное решение для салонов и постоянного использования. Высокое качество гарантировано.",
+    details: ["Рефилл 5 литров", "Red Mercury", "Для профессионального использования", "Восстанавливающий"],
+    notes: ["Восстановление", "Мягкость", "Витамины"]
   }
 ];
 
@@ -831,11 +1116,11 @@ function renderProducts(filter) {
   document.getElementById('product-count').textContent = filtered.length + ' товаров';
 
   grid.innerHTML = filtered.map(p => `
-    <div class="product-card" data-category="${p.category}">
+    <div class="product-card" data-category="${p.category}" onclick="openProductModal(${p.id})" style="cursor: pointer;">
       <div class="product-img-wrap">
         <img class="product-img-main" src="${p.img}" alt="${p.name}" loading="lazy">
         ${p.img2 ? `<img class="product-img-hover" src="${p.img2}" alt="${p.name}" loading="lazy">` : ''}
-        <button class="product-add" onclick="addToCart(${p.id})">В корзину</button>
+        <button class="product-add" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>
       </div>
       <div class="product-info">
         ${p.category === 'коллаборации' ? `<div class="product-tags"><span class="product-tag">Коллаб</span></div>` : ''}
@@ -931,6 +1216,138 @@ function acceptCookies() {
 if (localStorage.getItem('cookiesAccepted')) {
   document.getElementById('cookie-banner').classList.add('hidden');
 }
+
+// MODAL FUNCTIONS
+let currentProductId = null;
+let currentModalImages = [];
+
+function openProductModal(productId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+
+  currentProductId = productId;
+  currentModalImages = [product.img, product.img2 || product.img];
+
+  // Populate modal
+  document.getElementById('modal-name').textContent = product.name;
+  document.getElementById('modal-sub').textContent = product.sub || '';
+  document.getElementById('modal-price').textContent = formatPrice(product.price);
+  document.getElementById('modal-sku').textContent = product.sku ? `Артикул: ${product.sku}` : '';
+  document.getElementById('modal-description').textContent = product.description || '';
+
+  // Populate details
+  const detailsDiv = document.getElementById('modal-details');
+  if (product.details && product.details.length > 0) {
+    detailsDiv.innerHTML = product.details
+      .map(d => `<div class="modal-detail-item">• ${d}</div>`)
+      .join('');
+  } else {
+    detailsDiv.innerHTML = '';
+  }
+
+  // Populate notes
+  const notesSection = document.getElementById('modal-notes-section');
+  if (product.notes && product.notes.length > 0) {
+    const notesDiv = document.getElementById('modal-notes');
+    notesDiv.innerHTML = product.notes
+      .map(n => `<span class="modal-note-tag">${n}</span>`)
+      .join('');
+    notesSection.style.display = 'block';
+  } else {
+    notesSection.style.display = 'none';
+  }
+
+  // Set image counter
+  document.getElementById('modal-image-total').textContent = currentModalImages.length;
+
+  // Show first image
+  showModalImage(0);
+
+  // Open modal
+  document.getElementById('product-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+  document.getElementById('product-modal').classList.remove('open');
+  document.body.style.overflow = 'auto';
+  currentProductId = null;
+}
+
+function changeModalImage(direction) {
+  const current = parseInt(document.getElementById('modal-image-index').textContent) - 1;
+  const next = (current + direction + currentModalImages.length) % currentModalImages.length;
+  showModalImage(next);
+}
+
+function showModalImage(index) {
+  document.getElementById('modal-main-image').src = currentModalImages[index];
+  document.getElementById('modal-image-index').textContent = index + 1;
+}
+
+function addToCartFromModal() {
+  if (currentProductId) {
+    addToCart(currentProductId);
+    closeProductModal();
+  }
+}
+
+// Modal event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('product-modal');
+  const overlay = modal.querySelector('.modal-overlay');
+
+  overlay.addEventListener('click', closeProductModal);
+
+  // Close on ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeProductModal();
+    }
+  });
+});
 </script>
+
+<!-- PRODUCT MODAL -->
+<div id="product-modal" class="modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeProductModal()">&times;</button>
+
+    <div class="modal-images">
+      <img id="modal-main-image" src="" alt="Product">
+      <div class="modal-image-counter">
+        <span id="modal-image-index">1</span> / <span id="modal-image-total">2</span>
+      </div>
+      <div class="modal-image-nav">
+        <button class="modal-image-prev" onclick="changeModalImage(-1)">‹</button>
+        <button class="modal-image-next" onclick="changeModalImage(1)">›</button>
+      </div>
+    </div>
+
+    <div class="modal-info">
+      <div class="modal-header">
+        <h2 id="modal-name"></h2>
+        <p id="modal-sub" class="modal-sub"></p>
+      </div>
+
+      <div class="modal-details" id="modal-details"></div>
+
+      <div class="modal-description" id="modal-description"></div>
+
+      <div id="modal-notes-section" class="modal-notes-section">
+        <h3>Ноты</h3>
+        <div id="modal-notes" class="modal-notes"></div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-sku" id="modal-sku"></div>
+        <div class="modal-price" id="modal-price"></div>
+        <button class="modal-add-btn" onclick="addToCartFromModal()">В корзину</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

@@ -14,7 +14,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: center;
-    padding: 0 48px; height: 106px; background: rgba(23, 23, 23, 0.75);
+    padding: 0 48px; height: 71px; background: rgba(23, 23, 23, 0.75);
     backdrop-filter: blur(9px);
     -webkit-backdrop-filter: blur(9px);
     box-shadow:
@@ -39,7 +39,7 @@
   .highlight p { color: var(--black); font-weight: 400; margin: 0; }
 
   @media (max-width: 768px) {
-    nav { padding: 18px 20px; }
+    nav { padding: 12px 20px; }
     .nav-logo img { height: 16px !important; }
 
     /* Desktop nav hidden on mobile */
@@ -181,8 +181,15 @@
 
   <!-- Mobile nav (icons + hamburger) -->
   <div class="nav-mobile-right">
-    <span class="nav-search" onclick="openSearch()">🔍</span>
-    <span class="nav-cart" onclick="toggleCart()">🛒</span>
+    <span class="nav-search" onclick="openSearch()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="8" cy="8" r="6"/>
+      <path d="M12.5 12.5L17 17"/>
+    </svg></span>
+    <span class="nav-cart" onclick="toggleCart()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 2h1.5l1.5 12h12l1.5-10H6"/>
+      <circle cx="7" cy="17" r="1"/>
+      <circle cx="15" cy="17" r="1"/>
+    </svg></span>
     <div class="hamburger" onclick="toggleMobileMenu()">
       <span></span>
       <span></span>

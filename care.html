@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 48px; height: 106px;
+    padding: 0 48px; height: 71px;
     background: rgba(23, 23, 23, 0.75);
     backdrop-filter: blur(9px);
     -webkit-backdrop-filter: blur(9px);
@@ -86,7 +86,7 @@
 
   .nav-dropdown-menu {
     position: fixed;
-    top: 106px;
+    top: 71px;
     left: 0;
     right: 0;
     width: 100%;
@@ -164,12 +164,19 @@
   }
 
   .nav-cart:hover { opacity: 1; }
+  .nav-search svg, .nav-cart svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+    opacity: inherit;
+    transition: opacity 0.2s;
+  }
 
   /* Mobile menu (hidden by default) */
   .mobile-menu {
     display: none;
     position: fixed;
-    top: 106px;
+    top: 71px;
     left: 0;
     right: 0;
     width: 100%;
@@ -365,7 +372,7 @@
 
   /* CATEGORY HERO */
   .category-hero {
-    margin-top: 106px;
+    margin-top: 71px;
     padding: 80px 48px;
     background: linear-gradient(135deg, rgba(200, 180, 150, 0.1) 0%, rgba(220, 200, 170, 0.05) 100%);
     border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -828,7 +835,7 @@
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
 
   @media (max-width: 768px) {
-    nav { padding: 18px 20px; gap: 12px; }
+    nav { padding: 12px 20px; gap: 12px; }
     .nav-logo img { height: 16px !important; }
 
     /* Desktop nav hidden on mobile */
@@ -1225,8 +1232,15 @@
 
   <!-- Mobile nav (icons + hamburger) -->
   <div class="nav-mobile-right">
-    <span class="nav-search" onclick="openSearch()">🔍</span>
-    <span class="nav-cart" onclick="toggleCart()">🛒</span>
+    <span class="nav-search" onclick="openSearch()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="8" cy="8" r="6"/>
+      <path d="M12.5 12.5L17 17"/>
+    </svg></span>
+    <span class="nav-cart" onclick="toggleCart()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 2h1.5l1.5 12h12l1.5-10H6"/>
+      <circle cx="7" cy="17" r="1"/>
+      <circle cx="15" cy="17" r="1"/>
+    </svg></span>
     <div class="hamburger" onclick="toggleMobileMenu()">
       <span></span>
       <span></span>

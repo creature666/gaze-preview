@@ -1216,7 +1216,7 @@ const PRODUCTS = [
     name: "Набор саше",
     sub: "",
     price: 1400,
-    category: "уход",
+    category: "саше",
     img: "images/ab7f466a8113592db3ba4f76c8f0cfaa.jpg.jpeg",
     img2: "images/28475800.jpg.jpeg",
     description: "Ароматические саше для дома и автомобиля. Комплект из нескольких видов с разными ароматами. Долгостойкий запах сохраняется до 6 недель.",
@@ -1298,6 +1298,18 @@ const PRODUCTS = [
   },
   {
     id: 9,
+    name: "Лосьон Red Mercury",
+    sub: "Для рук и тела 500 мл",
+    price: 3500,
+    category: "уход",
+    img: "images/3f641a35451effc99d4337841e743778.jpg.jpeg",
+    img2: "images/3f641a35451effc99d4337841e743778.jpg_1.jpeg",
+    description: "Питательный лосьон Red Mercury для интенсивного ухода. Восстанавливает и питает кожу. Идеален для ежедневного использования.",
+    details: ["Лосьон 500 мл", "Для рук и тела", "Red Mercury"],
+    notes: ["Питание", "Восстановление", "Увлажнение"]
+  },
+  {
+    id: 10,
     name: "Свеча Temple of Boxing",
     sub: "Gaze × Backyard",
     price: 4400,
@@ -1310,7 +1322,176 @@ const PRODUCTS = [
     sku: "560"
   },
   {
-    id: 10,
+    id: 11,
+    name: "Свеча Heavy Mental",
+    sub: "Архив",
+    price: 4400,
+    category: "свеча",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Архивная свеча серии Heavy Mental. Редкая находка для коллекционеров. Оригинальный аромат с металлическими и минеральными нотками.",
+    details: ["Архивная серия", "Редкий выпуск", "Свеча 200г"],
+    notes: ["Металлические ноты", "Минералы", "Специфический аромат"]
+  },
+  {
+    id: 12,
+    name: "Свеча Angel Dust",
+    sub: "Свеча",
+    price: 4400,
+    category: "свеча",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Свеча серии Angel Dust с мягким и воздушным ароматом. Нежные нотки создают атмосферу спокойствия и комфорта. Идеальна для релаксации.",
+    details: ["Свеча 200г", "Натуральные ингредиенты", "Премиум-качество"],
+    notes: ["Мягкие ноты", "Комфорт", "Спокойствие"]
+  },
+  {
+    id: 13,
+    name: "Свеча Nafta",
+    sub: "Свеча",
+    price: 4400,
+    category: "свеча",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Свеча Nafta с интенсивным и своеобразным ароматом. Уникальная композиция для тех, кто ценит необычные запахи. Давит мощный и глубокий аромат.",
+    details: ["Свеча 200г", "Интенсивный аромат", "Лимитированная серия"],
+    notes: ["Мощный аромат", "Нефтяные ноты", "Глубокий профиль"]
+  },
+  {
+    id: 14,
+    name: "Свеча Heavy Mental",
+    sub: "Свеча",
+    price: 4400,
+    category: "свеча",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Свеча Heavy Mental с тяжёлым и глубоким ароматическим профилем. Предназначена для создания интенсивной атмосферы. Для смелых и авантюрных.",
+    details: ["Свеча 200г", "Глубокий аромат", "Интенсивная серия"],
+    notes: ["Тяжёлые ноты", "Интенсивность", "Глубина"]
+  },
+  {
+    id: 15,
+    name: "Свеча Red Mercury",
+    sub: "Свеча",
+    price: 4400,
+    category: "свеча",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Свеча Red Mercury - звезда нашей серии свечей. Энергичный и динамичный аромат. Идеально подходит для создания активной и вдохновляющей атмосферы.",
+    details: ["Свеча 200г", "Серия Red Mercury", "Премиум-качество"],
+    notes: ["Энергичный аромат", "Динамичность", "Мощность"]
+  },
+  {
+    id: 16,
+    name: "Диффузор Red Mercury",
+    sub: "100 мл",
+    price: 4400,
+    category: "диффузор",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Диффузор Red Mercury 100 мл. Распространяет аромат серии Red Mercury по всему помещению. Долгое действие и приятный запах.",
+    details: ["Диффузор 100 мл", "Red Mercury", "Долгостойкий"],
+    notes: ["Энергичный аромат", "Длительное действие", "Ароматерапия"]
+  },
+  {
+    id: 17,
+    name: "Диффузор Heavy Mental",
+    sub: "100 мл",
+    price: 4400,
+    category: "диффузор",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Диффузор Heavy Mental 100 мл. Интенсивный аромат серии Heavy Mental. Статус: нет в наличии.",
+    details: ["Диффузор 100 мл", "Heavy Mental", "Интенсивный"],
+    notes: ["Тяжёлые ноты", "Глубокий аромат", "Редкий"],
+    available: false
+  },
+  {
+    id: 18,
+    name: "Парфюм Red Mercury",
+    sub: "Парфюм для кожи и текстиля 50 мл",
+    price: 6000,
+    category: "парфюм",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Парфюм Red Mercury 50 мл для кожи и текстиля. Концентрированный аромат для длительного использования. Универсален в применении.",
+    details: ["Парфюм 50 мл", "Для кожи и текстиля", "Red Mercury"],
+    notes: ["Энергичный", "Долгостойкий", "Универсальный"]
+  },
+  {
+    id: 19,
+    name: "Парфюм Heavy Mental",
+    sub: "Парфюм для кожи и текстиля 50 мл",
+    price: 6000,
+    category: "парфюм",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Парфюм Heavy Mental 50 мл. Интенсивный и глубокий ароматический профиль. Для смелых и экспериментирующих.",
+    details: ["Парфюм 50 мл", "Для кожи и текстиля", "Heavy Mental"],
+    notes: ["Интенсивный", "Глубокий", "Авантюрный"]
+  },
+  {
+    id: 20,
+    name: "Парфюм Angel Dust",
+    sub: "Парфюм для кожи и текстиля 50 мл",
+    price: 6000,
+    category: "парфюм",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Парфюм Angel Dust 50 мл. Нежный и мягкий аромат для повседневного использования. Универсален и приятен.",
+    details: ["Парфюм 50 мл", "Для кожи и текстиля", "Angel Dust"],
+    notes: ["Нежный", "Мягкий", "Универсальный"]
+  },
+  {
+    id: 21,
+    name: "Парфюм Nafta",
+    sub: "Парфюм для кожи и текстиля 50 мл",
+    price: 6000,
+    category: "парфюм",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Парфюм Nafta 50 мл. Уникальный и необычный аромат. Для тех, кто ценит редкие и оригинальные запахи.",
+    details: ["Парфюм 50 мл", "Для кожи и текстиля", "Nafta"],
+    notes: ["Необычный", "Оригинальный", "Редкий"]
+  },
+  {
+    id: 22,
+    name: "Шампунь Red Mercury",
+    sub: "Рефилл 5 литров",
+    price: 6500,
+    category: "рефилл",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Рефилл шампуня Red Mercury 5 литров. Профессиональный объём для салонов и постоянного использования. Экономичное решение.",
+    details: ["Рефилл 5л", "Red Mercury", "Профессиональный"],
+    notes: ["Экономичный", "Долгостойкий", "Профессиональный"]
+  },
+  {
+    id: 23,
+    name: "Жидкое мыло Oyster",
+    sub: "Рефилл 5 литров",
+    price: 6500,
+    category: "рефилл",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Рефилл жидкого мыла Oyster 5 литров. Большой объём для регулярного использования. Экономично и практично.",
+    details: ["Рефилл 5л", "Oyster", "Профессиональный"],
+    notes: ["Экономичный", "Практичный", "Долгостойкий"]
+  },
+  {
+    id: 24,
+    name: "HOMIES x GAZE",
+    sub: "LIMITED EDITION",
+    price: 7000,
+    category: "коллаборации",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Эксклюзивная коллаборация HOMIES x GAZE. Ограниченный выпуск. Уникальное изделие для коллекционеров.",
+    details: ["Коллаборация HOMIES x GAZE", "Ограниченный выпуск", "Экслюзив"],
+    notes: ["Уникальный", "Редкий", "Коллекционный"]
+  },
+  {
+    id: 25,
     name: "Лосьон Red Mercury",
     sub: "Рефилл 5 литров",
     price: 7500,
@@ -1322,7 +1503,7 @@ const PRODUCTS = [
     notes: ["Питание", "Увлажнение", "Восстановление"]
   },
   {
-    id: 11,
+    id: 26,
     name: "Кондиционер Red Mercury",
     sub: "Рефилл 5 литров",
     price: 7500,
@@ -1332,6 +1513,18 @@ const PRODUCTS = [
     description: "Рефилл кондиционера Red Mercury объёмом 5 литров. Профессиональное средство для восстановления волос. Экономичное решение для салонов и постоянного использования. Высокое качество гарантировано.",
     details: ["Рефилл 5 литров", "Red Mercury", "Для профессионального использования", "Восстанавливающий"],
     notes: ["Восстановление", "Мягкость", "Витамины"]
+  },
+  {
+    id: 27,
+    name: "Лосьон Oyster",
+    sub: "Рефилл 5 литров",
+    price: 7500,
+    category: "рефилл",
+    img: "images/placeholder.jpg.jpeg",
+    img2: "images/placeholder.jpg.jpeg",
+    description: "Рефилл лосьона Oyster 5 литров. Питательный состав для интенсивного ухода. Экономичный объём для постоянного использования.",
+    details: ["Рефилл 5л", "Oyster", "Профессиональный"],
+    notes: ["Питание", "Увлажнение", "Экономичный"]
   }
 ];
 

@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>GAZE — Каталог</title>
+<title>GAZE — Парфюмы</title>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -288,13 +288,48 @@
     color: white;
   }
 
+  /* CATEGORY HERO */
+  .category-hero {
+    margin-top: 106px;
+    padding: 80px 48px;
+    background: linear-gradient(135deg, rgba(200, 180, 150, 0.1) 0%, rgba(220, 200, 170, 0.05) 100%);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .category-hero-text h1 {
+    font-size: 48px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+
+  .category-hero-text p {
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+    color: rgba(0,0,0,0.65);
+    max-width: 480px;
+  }
+
+  .category-hero-image {
+    aspect-ratio: 4/5;
+    background: rgba(0,0,0,0.04);
+    border-radius: 2px;
+  }
+
   /* PAGE HEADER */
   .page-header {
-    padding: 154px 48px 60px;
+    padding: 60px 48px 40px;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: none;
   }
 
   .page-title {
@@ -1077,7 +1112,7 @@
   <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
   <ul class="nav-links">
     <li class="nav-dropdown">
-      <a href="shop.html" class="active">Каталог</a>
+      <a href="shop.html">Каталог</a>
       <div class="nav-dropdown-menu">
         <a href="shop.html">Все товары</a>
         <a href="care.html">Уход</a>
@@ -1086,7 +1121,7 @@
       </div>
     </li>
     <li><a href="care.html">Уход</a></li>
-    <li><a href="perfumes.html">Парфюмы</a></li>
+    <li><a href="perfumes.html" class="active">Парфюмы</a></li>
     <li><a href="home.html">Home</a></li>
     <li><a href="where.html">Где купить</a></li>
     <li><a href="b2b.html">B2B</a></li>
@@ -1117,18 +1152,17 @@
   </div>
 </div>
 
-<div class="page-header">
-  <h1 class="page-title">Каталог</h1>
-  <span class="page-count" id="product-count">11 товаров</span>
+<div class="category-hero">
+  <div class="category-hero-text">
+    <h1>Парфюмы</h1>
+    <p>Уникальные ароматические композиции, каждая из которых рассказывает свою историю. От классических чувственных запахов до смелых экспериментальных ароматов — парфюмы GAZE созданы для тех, кто ценит качество и индивидуальность.</p>
+  </div>
+  <div class="category-hero-image"></div>
 </div>
 
-<div class="filters">
-  <button class="filter-btn active" onclick="filterProducts('all', this)">Все</button>
-  <button class="filter-btn" onclick="filterProducts('уход', this)">Уход</button>
-  <button class="filter-btn" onclick="filterProducts('свеча', this)">Свечи</button>
-  <button class="filter-btn" onclick="filterProducts('объект', this)">Объекты</button>
-  <button class="filter-btn" onclick="filterProducts('рефилл', this)">Рефилл</button>
-  <button class="filter-btn" onclick="filterProducts('коллаборации', this)">Коллаборации</button>
+<div class="page-header">
+  <h1 class="page-title">Товары</h1>
+  <span class="page-count" id="product-count"></span>
 </div>
 
 <div class="shop-grid" id="shop-grid"></div>
@@ -1604,6 +1638,9 @@ document.addEventListener('DOMContentLoaded', function() {
       closeProductModal();
     }
   });
+
+  // Initialize category filter for care page
+  renderProducts('парфюмы');
 });
 </script>
 

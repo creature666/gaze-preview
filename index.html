@@ -81,7 +81,63 @@
     transition: opacity 0.2s;
   }
 
-  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+  /* NAV DROPDOWN */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-menu {
+    position: fixed;
+    top: 106px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(23, 23, 23, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: start;
+    padding: 60px 80px;
+    gap: 160px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150;
+  }
+
+  .nav-dropdown-menu a {
+    padding: 14px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.15s ease-out;
+    white-space: nowrap;
+    display: block;
+  }
+
+  .nav-dropdown-menu a:hover {
+    color: white;
+  }
+
+  .nav-dropdown-menu a:first-child {
+    font-weight: 500;
+    color: white;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: block;
+    width: 100%;
+  }
 
 
   /* HERO */
@@ -497,7 +553,15 @@
 <nav>
   <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
   <ul class="nav-links">
-    <li><a href="shop.html">Каталог</a></li>
+    <li class="nav-dropdown">
+      <a href="shop.html">Каталог</a>
+      <div class="nav-dropdown-menu">
+        <a href="shop.html">Все товары</a>
+        <a href="care.html">Уход</a>
+        <a href="perfumes.html">Парфюмы</a>
+        <a href="home.html">Home</a>
+      </div>
+    </li>
     <li><a href="where.html">Где купить</a></li>
     <li><a href="b2b.html">B2B</a></li>
     <li><a href="collab.html">Коллаборации</a></li>
@@ -645,6 +709,28 @@
   }
   if (localStorage.getItem('cookiesAccepted')) {
     document.getElementById('cookie-banner').classList.add('hidden');
+  }
+
+  // NAV DROPDOWN
+  const navDropdown = document.querySelector('.nav-dropdown');
+  const navDropdownMenu = document.querySelector('.nav-dropdown-menu');
+  let dropdownTimeout;
+
+  if (navDropdown && navDropdownMenu) {
+    navDropdown.addEventListener('mouseenter', () => {
+      clearTimeout(dropdownTimeout);
+      navDropdownMenu.style.opacity = '1';
+      navDropdownMenu.style.visibility = 'visible';
+      navDropdownMenu.style.pointerEvents = 'auto';
+    });
+
+    navDropdown.addEventListener('mouseleave', () => {
+      dropdownTimeout = setTimeout(() => {
+        navDropdownMenu.style.opacity = '0';
+        navDropdownMenu.style.visibility = 'hidden';
+        navDropdownMenu.style.pointerEvents = 'none';
+      }, 100);
+    });
   }
 </script>
 </body>

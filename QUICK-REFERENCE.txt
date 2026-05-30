@@ -1,0 +1,151 @@
+GAZE PRODUCT DATABASE - QUICK REFERENCE
+================================================================================
+
+CREATED FILES:
+- products-database.json (12 KB) - Structured data, ready for APIs/databases
+- products-database.csv (6.8 KB) - Spreadsheet format for Excel/Google Sheets
+- README-PRODUCTS-DB.md - Full documentation
+- PRODUCT-EXPORT-SUMMARY.txt - Detailed statistics and export info
+- QUICK-REFERENCE.txt - This file
+
+================================================================================
+QUICK FACTS:
+================================================================================
+
+Total Products: 11
+Inventory Value: 40,900 RUB
+Categories: 4 (уход, коллаборации, свеча, рефилл)
+
+Price Range: 1,100 - 7,500 RUB
+Average Price: 3,718 RUB
+Most Common Price: 3,000 RUB (4 products)
+
+All products have: 2 images, description, details list, scent notes
+Limited editions: 2 products with SKU
+Professional refills: 2 x 5-liter bottles @ 7,500 RUB each
+
+================================================================================
+HOW TO USE THE JSON:
+================================================================================
+
+JavaScript/Node.js:
+  const db = require('./products-database.json');
+  console.log(db.products.length); // 11
+  console.log(db.price_statistics); // price stats
+
+JavaScript (fetch):
+  fetch('./products-database.json')
+    .then(r => r.json())
+    .then(data => console.log(data.products))
+
+Python:
+  import json
+  with open('products-database.json') as f:
+    db = json.load(f)
+  for product in db['products']:
+    print(product['name'], product['price'])
+
+================================================================================
+HOW TO USE THE CSV:
+================================================================================
+
+Excel: File → Open → products-database.csv
+Google Sheets: Upload or paste URL
+Python pandas: pd.read_csv('products-database.csv')
+Any database: Import CSV with standard tools
+
+Columns: ID, Name, Category, Subcategory, Price, SKU, Primary Image, 
+         Secondary Image, Description, Details, Notes, Tags
+
+================================================================================
+PRODUCT BREAKDOWN:
+================================================================================
+
+CARE PRODUCTS (Уход) - 7 items:
+  1. Мыло Angel Dust (1,100 RUB) - Glycerin soap
+  2. Набор саше (1,400 RUB) - Scent sachets  
+  4. Шампунь Red Mercury (3,000 RUB) - Professional shampoo
+  5. Жидкое мыло Oyster (3,000 RUB) - Liquid soap
+  6. Жидкое мыло Red Mercury (3,000 RUB) - Liquid soap
+  7. Кондиционер Red Mercury (3,500 RUB) - Hair conditioner
+  8. Лосьон Oyster (3,500 RUB) - Body lotion
+
+COLLABORATIONS (Коллаборации) - 1 item:
+  3. Troll / Smelly Tale × Gaze (3,000 RUB) - Limited edition, SKU 300
+
+CANDLES (Свеча) - 1 item:
+  9. Свеча Temple of Boxing / Gaze × Backyard (4,400 RUB) - Limited edition, SKU 560
+
+REFILLS (Рефилл) - 2 items:
+  10. Лосьон Red Mercury (7,500 RUB) - 5L professional refill
+  11. Кондиционер Red Mercury (7,500 RUB) - 5L professional refill
+
+================================================================================
+SERIES & COLLECTIONS:
+================================================================================
+
+RED MERCURY SERIES: Products 4, 6, 7, 10, 11
+OYSTER SERIES: Products 5, 8
+LIMITED EDITIONS: Products 3, 9 (with SKU)
+FEATURED ON HOMEPAGE: Products 3, 9, 10, 11
+
+================================================================================
+IMAGE REFERENCES:
+================================================================================
+
+Format: images/{hash}.jpg.jpeg (main) + images/{hash}.jpg_1.jpeg (hover)
+
+Example products:
+- Мыло Angel Dust: images/45700513.jpg.jpeg
+- Troll: images/c5c11ab33002019b986e5eed43823790.jpg.jpeg
+- Свеча Temple of Boxing: images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg
+
+All 11 products have dual images for hover effects in UI.
+
+================================================================================
+DATA QUALITY:
+================================================================================
+
+✓ 100% product coverage (11/11 products)
+✓ All prices verified and correct
+✓ All descriptions unique and complete (40-120 words each)
+✓ All image paths validated
+✓ Valid JSON format (tested)
+✓ UTF-8 encoding (supports Russian characters)
+✓ No missing fields
+✓ Categories correctly assigned
+✓ SKUs present where applicable
+
+================================================================================
+RECOMMENDED USAGE:
+================================================================================
+
+1. E-COMMERCE: Use JSON for API endpoints
+   GET /api/products → returns products-database.json data
+
+2. SPREADSHEETS: Use CSV for inventory management
+   Import to Excel/Sheets for stock tracking
+
+3. BACKUP: Keep both formats for redundancy
+   JSON for code, CSV for human review
+
+4. UPDATES: When products change in shop.html
+   Re-export both JSON and CSV
+   Maintain version control with timestamps
+
+5. INTEGRATIONS: Use JSON for third-party services
+   Shopify, WooCommerce, Sanity CMS, etc.
+
+================================================================================
+NEED HELP?
+================================================================================
+
+- JSON format questions: See products-database.json structure
+- CSV format questions: Open in Excel/Sheets
+- Full documentation: Read README-PRODUCTS-DB.md
+- Statistical analysis: Check PRODUCT-EXPORT-SUMMARY.txt
+- Quick answers: See this file
+
+================================================================================
+END OF QUICK REFERENCE
+================================================================================

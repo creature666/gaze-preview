@@ -1,0 +1,361 @@
+{
+  "metadata": {
+    "store": "GAZE — Ольфакторное бюро",
+    "type": "Product Database",
+    "total_products": 11,
+    "last_updated": "2026-05-30",
+    "currency": "RUB",
+    "currency_symbol": "₽",
+    "categories": [
+      "уход",
+      "свеча",
+      "коллаборации",
+      "рефилл",
+      "объект"
+    ]
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Мыло Angel Dust",
+      "category": "уход",
+      "subcategory": "Глицериновое мыло",
+      "price": 1100,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/45700513.jpg.jpeg",
+        "secondary": "images/45700513.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Натуральное глицериновое мыло с нежным ароматом. Деликатное очищение для чувствительной кожи. Увлажняющая формула сохраняет естественный баланс кожи.",
+      "details": [
+        "Глицериновое мыло",
+        "100% натуральный состав"
+      ],
+      "notes": [
+        "Мягкий аромат",
+        "Увлажнение"
+      ],
+      "tags": []
+    },
+    {
+      "id": 2,
+      "name": "Набор саше",
+      "category": "уход",
+      "subcategory": null,
+      "price": 1400,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/ab7f466a8113592db3ba4f76c8f0cfaa.jpg.jpeg",
+        "secondary": "images/28475800.jpg.jpeg",
+        "count": 2
+      },
+      "description": "Ароматические саше для дома и автомобиля. Комплект из нескольких видов с разными ароматами. Долгостойкий запах сохраняется до 6 недель.",
+      "details": [
+        "Набор саше",
+        "Для дома и авто"
+      ],
+      "notes": [
+        "Долгостойкость",
+        "Натуральные ароматы"
+      ],
+      "tags": []
+    },
+    {
+      "id": 3,
+      "name": "Troll",
+      "category": "коллаборации",
+      "subcategory": "Smelly Tale × Gaze",
+      "price": 3000,
+      "currency": "RUB",
+      "sku": "300",
+      "images": {
+        "primary": "images/c5c11ab33002019b986e5eed43823790.jpg.jpeg",
+        "secondary": "images/9cba52ab5e3bd264c24c1d81066b78d7.jpg.jpeg",
+        "count": 2
+      },
+      "description": "Уникальное ароматическое изделие в сотрудничестве Smelly Tale и Gaze. Специальная серия с интересным дизайном и оригинальным ароматическим профилем. Ограниченный выпуск.",
+      "details": [
+        "Коллаборация Smelly Tale × Gaze",
+        "Ограниченный выпуск",
+        "Авторский дизайн"
+      ],
+      "notes": [
+        "Амбра",
+        "Мускус",
+        "Восточные ноты"
+      ],
+      "tags": [
+        "Коллаб"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Шампунь Red Mercury",
+      "category": "уход",
+      "subcategory": "Шампунь для волос 500 мл",
+      "price": 3000,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/10131750.jpg.jpeg",
+        "secondary": "images/10131750.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Профессиональный шампунь серии Red Mercury. Обогащён натуральными экстрактами и эфирными маслами. Придаёт волосам блеск и объём. Подходит для всех типов волос.",
+      "details": [
+        "Шампунь 500 мл",
+        "Натуральные компоненты",
+        "Для всех типов волос"
+      ],
+      "notes": [
+        "Восстановление",
+        "Блеск и объём"
+      ],
+      "tags": []
+    },
+    {
+      "id": 5,
+      "name": "Жидкое мыло Oyster",
+      "category": "уход",
+      "subcategory": "Для рук и тела 500 мл",
+      "price": 3000,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/12293916.jpg.jpeg",
+        "secondary": "images/12293916.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Мягкое жидкое мыло серии Oyster. Превосходно очищает и увлажняет кожу. Деликатная формула с экстрактом жемчуга. Приятный аромат на весь день.",
+      "details": [
+        "Жидкое мыло 500 мл",
+        "Для рук и тела",
+        "С экстрактом жемчуга"
+      ],
+      "notes": [
+        "Мягкое очищение",
+        "Увлажнение"
+      ],
+      "tags": []
+    },
+    {
+      "id": 6,
+      "name": "Жидкое мыло Red Mercury",
+      "category": "уход",
+      "subcategory": "Для рук и тела 500 мл",
+      "price": 3000,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/13305597.jpg.jpeg",
+        "secondary": "images/13305597.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Жидкое мыло серии Red Mercury с энергичным ароматом. Быстрое и эффективное очищение для кожи рук и тела. Питающая формула с натуральными ингредиентами.",
+      "details": [
+        "Жидкое мыло 500 мл",
+        "Для рук и тела",
+        "Red Mercury"
+      ],
+      "notes": [
+        "Энергичный аромат",
+        "Питание",
+        "Мягкая очистка"
+      ],
+      "tags": []
+    },
+    {
+      "id": 7,
+      "name": "Кондиционер Red Mercury",
+      "category": "уход",
+      "subcategory": "Кондиционер для волос 500 мл",
+      "price": 3500,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/42526944.jpg.jpeg",
+        "secondary": "images/42526944.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Кондиционер серии Red Mercury для ухода после шампуня. Содержит витамины и масла, восстанавливающие структуру волос. Облегчает расчёсывание и придаёт мягкость.",
+      "details": [
+        "Кондиционер 500 мл",
+        "Red Mercury",
+        "Восстанавливающий"
+      ],
+      "notes": [
+        "Мягкость волос",
+        "Восстановление",
+        "Витамины и масла"
+      ],
+      "tags": []
+    },
+    {
+      "id": 8,
+      "name": "Лосьон Oyster",
+      "category": "уход",
+      "subcategory": "Для рук и тела 500 мл",
+      "price": 3500,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/34397284.jpg.jpeg",
+        "secondary": "images/34397284.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Питательный лосьон серии Oyster для рук и тела. Быстро впитывается, оставляя кожу мягкой и увлажнённой. Содержит экстракт жемчуга и натуральные масла.",
+      "details": [
+        "Лосьон 500 мл",
+        "Для рук и тела",
+        "Oyster"
+      ],
+      "notes": [
+        "Питание",
+        "Увлажнение",
+        "Шелковистость"
+      ],
+      "tags": []
+    },
+    {
+      "id": 9,
+      "name": "Свеча Temple of Boxing",
+      "category": "свеча",
+      "subcategory": "Gaze × Backyard",
+      "price": 4400,
+      "currency": "RUB",
+      "sku": "560",
+      "images": {
+        "primary": "images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg",
+        "secondary": "images/a6909fd892a033085fe87424ec1a7a2f.jpg.jpeg",
+        "count": 2
+      },
+      "description": "Ограниченный выпуск свечи в сотрудничестве с Backyard. Аромат вдохновлён тайским боксом и сочетает ладан, бергамот, лаванду и секретный зелёный ингредиент (разрешён в Таиланде). Долгостойкая свеча премиум-качества.",
+      "details": [
+        "Коллаборация Gaze × Backyard",
+        "Ограниченный выпуск",
+        "Восточные ароматы",
+        "Свеча 200г"
+      ],
+      "notes": [
+        "Ладан",
+        "Бергамот",
+        "Лаванда",
+        "Зелёные ноты"
+      ],
+      "tags": [
+        "Коллаб"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Лосьон Red Mercury",
+      "category": "рефилл",
+      "subcategory": "Рефилл 5 литров",
+      "price": 7500,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/3f641a35451effc99d4337841e743778.jpg.jpeg",
+        "secondary": "images/3f641a35451effc99d4337841e743778.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Рефилл лосьона Red Mercury в большом объёме 5 литров. Идеален для салонов красоты и постоянных пользователей. Профессиональное качество по доступной цене. Быстрая доставка.",
+      "details": [
+        "Рефилл 5 литров",
+        "Red Mercury",
+        "Для профессионального использования",
+        "Экономичный объём"
+      ],
+      "notes": [
+        "Питание",
+        "Увлажнение",
+        "Восстановление"
+      ],
+      "tags": [
+        "Рефилл"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Кондиционер Red Mercury",
+      "category": "рефилл",
+      "subcategory": "Рефилл 5 литров",
+      "price": 7500,
+      "currency": "RUB",
+      "sku": null,
+      "images": {
+        "primary": "images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg",
+        "secondary": "images/8e1f856d9d6bd177067e32ed80119ed8.jpg_1.jpeg",
+        "count": 2
+      },
+      "description": "Рефилл кондиционера Red Mercury объёмом 5 литров. Профессиональное средство для восстановления волос. Экономичное решение для салонов и постоянного использования. Высокое качество гарантировано.",
+      "details": [
+        "Рефилл 5 литров",
+        "Red Mercury",
+        "Для профессионального использования",
+        "Восстанавливающий"
+      ],
+      "notes": [
+        "Восстановление",
+        "Мягкость",
+        "Витамины"
+      ],
+      "tags": [
+        "Рефилл"
+      ]
+    }
+  ],
+  "price_statistics": {
+    "min_price": 1100,
+    "max_price": 7500,
+    "average_price": 3718.18,
+    "median_price": 3250,
+    "price_distribution": {
+      "1000-2000": 2,
+      "2001-3000": 4,
+      "3001-4000": 2,
+      "4001-5000": 1,
+      "7500": 2
+    }
+  },
+  "category_breakdown": {
+    "уход": {
+      "count": 7,
+      "products": [1, 2, 4, 5, 6, 7, 8],
+      "price_range": "1100-3500"
+    },
+    "коллаборации": {
+      "count": 1,
+      "products": [3],
+      "price_range": "3000"
+    },
+    "свеча": {
+      "count": 1,
+      "products": [9],
+      "price_range": "4400"
+    },
+    "рефилл": {
+      "count": 2,
+      "products": [10, 11],
+      "price_range": "7500"
+    }
+  },
+  "collections": {
+    "featured_on_homepage": [3, 9, 10, 11],
+    "with_sku": [3, 9],
+    "limited_edition": [3, 9],
+    "red_mercury_series": [4, 6, 7, 10, 11],
+    "oyster_series": [5, 8],
+    "has_secondary_image": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  },
+  "export_info": {
+    "format": "JSON",
+    "encoding": "UTF-8",
+    "export_date": "2026-05-30",
+    "source": "shop.html PRODUCTS array",
+    "usage": "Product inventory management, catalog import, e-commerce systems"
+  }
+}

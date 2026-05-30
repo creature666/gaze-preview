@@ -450,27 +450,6 @@
     transform: translateY(0);
   }
 
-  /* EDIT MODE */
-  [data-editable="true"].editable-active {
-    cursor: grab !important;
-    background: rgba(200, 53, 42, 0.05);
-    outline: 2px dashed rgba(200, 53, 42, 0.5);
-    outline-offset: 4px;
-  }
-  [data-editable="true"].editable-active:active { cursor: grabbing !important; }
-  #edit-mode-btn {
-    background: none; border: none; color: white; cursor: pointer;
-    font-size: 11px; letter-spacing: 0.2em; opacity: 0.5;
-    transition: opacity 0.2s; text-transform: uppercase; font-family: var(--sans);
-  }
-  #edit-mode-btn:hover { opacity: 1 !important; }
-  #edit-mode-info {
-    position: fixed; bottom: 20px; right: 20px;
-    background: rgba(200, 53, 42, 0.95); color: white;
-    padding: 12px 16px; font-size: 11px; letter-spacing: 0.1em;
-    z-index: 999; display: none; font-family: monospace;
-  }
-  #edit-mode-info.visible { display: block; }
 
   @media (max-width: 768px) {
     nav { padding: 18px 20px; gap: 12px; }
@@ -522,7 +501,7 @@
 <section class="hero">
   <img class="hero-bg" src="images/mercury background.png" alt="Red Mercury">
   <div class="hero-overlay"></div>
-  <div class="hero-content" data-editable="true" data-name="hero-text">
+  <div class="hero-content">
     <div class="hero-text">
       <p><strong>Gaze — ольфакторное бюро,</strong> основанное в 2020 году. Мы создаём уникальные ароматы и объекты интерьера. Наша цель — показать новые грани истинного гедонизма и раскрыть потенциал ваших чувств.</p>
     </div>
@@ -652,52 +631,6 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
-
-  // ===== DEV MODE =====
-  let editMode = false;
-  let draggedEl = null;
-  let offsetX = 0, offsetY = 0;
-  const editableEls = document.querySelectorAll('[data-editable="true"]');
-  const infoBox = document.createElement('div');
-  infoBox.id = 'edit-mode-info';
-  infoBox.textContent = '✏️ Click & drag to move';
-  document.body.appendChild(infoBox);
-
-  function toggleEditMode() {
-    editMode = !editMode;
-    if (editMode) {
-      document.body.style.cursor = 'move';
-      infoBox.classList.add('visible');
-      editableEls.forEach(el => { el.style.position = 'relative'; el.classList.add('editable-active'); });
-    } else {
-      document.body.style.cursor = 'default';
-      infoBox.classList.remove('visible');
-      editableEls.forEach(el => el.classList.remove('editable-active'));
-      const css = [];
-      editableEls.forEach(el => {
-        if (el.style.top || el.style.left)
-          css.push(`[data-name="${el.dataset.name}"] { position: relative; top: ${el.style.top}; left: ${el.style.left}; }`);
-      });
-      if (css.length) { console.log('📋 CSS:\n' + css.join('\n')); alert('✅ CSS в консоли (F12)'); }
-    }
-  }
-
-  editableEls.forEach(el => {
-    el.addEventListener('mousedown', e => {
-      if (!editMode || e.target.tagName === 'A') return;
-      e.preventDefault();
-      draggedEl = el;
-      const r = el.getBoundingClientRect();
-      offsetX = e.clientX - r.left;
-      offsetY = e.clientY - r.top;
-    });
-  });
-  document.addEventListener('mousemove', e => {
-    if (!draggedEl || !editMode) return;
-    draggedEl.style.top = (e.clientY - offsetY) + 'px';
-    draggedEl.style.left = (e.clientX - offsetX) + 'px';
-  });
-  document.addEventListener('mouseup', () => { draggedEl = null; });
 
   function acceptCookies() {
     localStorage.setItem('cookiesAccepted', '1');

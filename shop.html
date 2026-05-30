@@ -817,7 +817,7 @@ const PRODUCTS = [
   }
 ];
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let activeFilter = 'all';
 
 function formatPrice(p) {
@@ -869,7 +869,6 @@ function addToCart(id) {
 function updateCart() {
   const count = cart.reduce((s, i) => s + i.qty, 0);
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  document.getElementById('cart-count').textContent = count;
   document.getElementById('cart-total').textContent = formatPrice(total);
 
   const itemsEl = document.getElementById('cart-items');
@@ -893,6 +892,8 @@ function updateCart() {
       <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
     </div>
   `).join('');
+
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 function changeQty(id, delta) {

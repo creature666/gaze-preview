@@ -699,13 +699,6 @@
   });
   document.addEventListener('mouseup', () => { draggedEl = null; });
 
-  const editBtn = document.createElement('button');
-  editBtn.id = 'edit-mode-btn';
-  editBtn.textContent = '✏️ Edit';
-  editBtn.style.cssText = 'position:absolute; right:48px;';
-  editBtn.addEventListener('click', toggleEditMode);
-  document.querySelector('nav').appendChild(editBtn);
-
   function acceptCookies() {
     localStorage.setItem('cookiesAccepted', '1');
     document.getElementById('cookie-banner').classList.add('hidden');

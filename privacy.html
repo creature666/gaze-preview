@@ -39,6 +39,30 @@
   @media (max-width: 768px) {
     nav { padding: 18px 20px; }
     .nav-logo img { height: 16px !important; }
+
+    /* Desktop nav hidden on mobile */
+    .nav-links:not(.mobile-menu) { display: none; }
+
+    /* Mobile nav icons and hamburger visible */
+    .nav-mobile-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hamburger { display: flex; }
+    .nav-search { font-size: 18px; opacity: 0.6; }
+    .nav-cart { font-size: 18px; opacity: 0.6; }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+      padding: 20px 48px;
+    }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      font-size: 11px;
+    }
     .nav-links { gap: 14px; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
     .nav-links::-webkit-scrollbar { display: none; }
     .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
@@ -139,7 +163,31 @@
 <body>
 <nav>
   <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
+
+  <!-- Desktop nav -->
   <ul class="nav-links">
+    <li><a href="shop.html">Каталог</a></li>
+    <li><a href="care.html">Уход</a></li>
+    <li><a href="perfumes.html">Парфюмы</a></li>
+    <li><a href="home.html">Home</a></li>
+    <li><a href="where.html">Где купить</a></li>
+    <li><a href="b2b.html">B2B</a></li>
+    <li><a href="collab.html">Коллаборации</a></li>
+  </ul>
+
+  <!-- Mobile nav (icons + hamburger) -->
+  <div class="nav-mobile-right">
+    <span class="nav-search" onclick="openSearch()">🔍</span>
+    <span class="nav-cart" onclick="toggleCart()">🛒</span>
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Mobile menu (dropdown) -->
+  <ul class="nav-links mobile-menu" id="mobile-menu">
     <li><a href="shop.html">Каталог</a></li>
     <li><a href="care.html">Уход</a></li>
     <li><a href="perfumes.html">Парфюмы</a></li>

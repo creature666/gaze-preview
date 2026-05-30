@@ -12,7 +12,7 @@
 - **11 товаров** в каталоге с фотографиями
 - **6 правовых документов** на русском (ФЗ-152, ГК РФ, ЗоЗПП)
 - **Фильтры, корзина, cookie-согласие** — JS без frameworks
-- **Дизайн:** чистый минимализм, Arial CAPS, белый фон
+- **Дизайн:** чистый минимализм, Arial CAPS, чёрный nav везде
 
 ---
 
@@ -26,14 +26,17 @@ python3 -m http.server 3456
 # Открыть http://localhost:3456
 ```
 
-### Редактировать
+### Структура файлов
 
-- `index.html` — главная (hero, новинки, о нас, B2B, где купить)
-- `shop.html` — каталог (11 товаров + фильтры)
-- `images/` — 122 файла товарных фото
-- Папка с legal pages: `privacy.html`, `offer.html`, `cookies.html`, `delivery.html`, `payment.html`, `returns.html`
+- `index.html` — главная (hero с фото Red Mercury, новинки, footer белый)
+- `shop.html` — каталог (11 товаров + фильтры + корзина)
+- `b2b.html` — B2B страница
+- `collab.html` — коллаборации
+- `where.html` — где купить
+- `images/` — товарные фото + `mercury background.png` (hero фон)
+- Правовые: `privacy.html`, `offer.html`, `cookies.html`, `delivery.html`, `payment.html`, `returns.html`
 
-### Деплоить обновления
+### Деплой
 
 ```bash
 git add .
@@ -54,20 +57,19 @@ git push origin main
 | Шрифт | Arial, sans-serif |
 | Стиль | ВСЕ CAPS, no serifs, no italics |
 
+**Nav:** высота 106px, чёрный фон, лого слева, ссылки по центру  
+**Footer:** чёрный на всех страницах, белый только на главной  
 Логотип: `logo.svg` (GAZE wordmark)
 
 ---
 
-## 📋 Содержимое
+## 📋 Страницы
 
 ### Главная (index.html)
-1. **Hero** — GAZE логотип + описание
+1. **Hero** — фото Red Mercury на фоне, текст описания слева по центру
 2. **Marquee** — бегущая строка категорий
 3. **Новинки** — 4 товара с фото (чёрный фон)
-4. **О нас** — "Новые грани истинного гедонизма"
-5. **B2B** — размещение партнёров (красный фон)
-6. **Где купить** — города (СПб, Москва, Казань)
-7. **Footer** — соцсети, рассылка, реквизиты, ссылки
+4. **Footer** — белый, соцсети + реквизиты + правовые ссылки
 
 ### Каталог (shop.html)
 - 11 товаров с фотографиями
@@ -87,14 +89,19 @@ git push origin main
 
 ## 🛒 Товары в каталоге
 
-| # | Название | Цена | Фото |
-|---|----------|------|------|
-| 1 | Мыло Angel Dust | 1 100₽ | `45700513...` |
-| 2 | Набор саше | 1 400₽ | `ab7f466a...` |
-| 3 | Troll (Smelly Tale × Gaze) | 3 000₽ | `c5c11ab3...` |
-| 4–8 | Шампуни, лосьоны, мыло | 3 000–3 500₽ | ... |
-| 9 | Свеча Temple of Boxing | 4 400₽ | `90c06c34...` |
-| 10–11 | Рефиллы Red Mercury | 7 500₽ | `3f641a35...` |
+| # | Название | Цена |
+|---|----------|------|
+| 1 | Мыло Angel Dust | 1 100₽ |
+| 2 | Набор саше | 1 400₽ |
+| 3 | Troll (Smelly Tale × Gaze) | 3 000₽ |
+| 4 | Шампунь Red Mercury | 3 000₽ |
+| 5 | Жидкое мыло Oyster | 3 000₽ |
+| 6 | Жидкое мыло Red Mercury | 3 000₽ |
+| 7 | Кондиционер Red Mercury 500мл | 3 500₽ |
+| 8 | Лосьон Oyster | 3 500₽ |
+| 9 | Свеча Temple of Boxing | 4 400₽ |
+| 10 | Лосьон Red Mercury (рефилл 5л) | 7 500₽ |
+| 11 | Кондиционер Red Mercury (рефилл 5л) | 7 500₽ |
 
 ---
 
@@ -106,54 +113,36 @@ git push origin main
 **Дата регистрации:** 02.05.2023  
 **Email:** gazeoline01@gmail.com
 
-Все документы соответствуют требованиям:
-- ФЗ-152 "О персональных данных"
-- ФЗ-149 "Об информации"
-- ЗоЗПП "О защите прав потребителей"
-- ГК РФ (договор, оферта)
-
 ---
 
 ## 🔧 Технические детали
 
 - **Язык:** HTML5, CSS3, Vanilla JS (no frameworks)
 - **Сервер:** Python http.server (порт 3456)
-- **Версия контроля:** Git + GitHub Pages
-- **Браузеры:** Chrome, Safari, Firefox
-- **Адаптивность:** CSS clamp() для всех размеров
+- **Деплой:** GitHub Pages (ветка main)
+- **Версия:** v5
 
-### JavaScript функции
-- `acceptCookies()` — сохранить согласие в localStorage
-- `addToCart()` — добавить товар в корзину
-- Scroll reveal анимации (.reveal класс)
+### JavaScript
+- `acceptCookies()` — согласие в localStorage
+- `addToCart()` — корзина
+- Edit mode — drag-and-drop редактор позиций (кнопка ✏️ Edit в nav на главной)
+- Scroll reveal анимации (.reveal)
 
-### localStorage ключи
-- `cookiesAccepted` — согласие на cookies (значение: '1')
+### localStorage
+- `cookiesAccepted` — согласие на cookies
 - `cart` — товары в корзине (JSON)
 
 ---
 
-## 📊 GitHub
-
-- **Репозиторий:** https://github.com/creature666/gaze-preview
-- **Branch:** main
-- **Автор:** creature666
-- **License:** Proprietary
-
----
-
-## 🚀 Следующие шаги (опционально)
+## 🚀 Следующие шаги
 
 - [ ] Реальные ссылки на соцсети (Telegram, VK, MAX)
-- [ ] Интеграция ЮКасса платежей (API)
+- [ ] Интеграция ЮКасса (API)
 - [ ] Backend для заказов
-- [ ] Admin панель
 - [ ] Миграция на Next.js + Sanity CMS
 - [ ] SEO (sitemap, meta, schema.org)
 - [ ] Analytics (GA4)
-- [ ] Email-маркетинг
 
 ---
 
-**Дата создания:** май 2026  
-**Статус:** ✅ Production-ready, live на GitHub Pages
+**Версия:** v5 · **Дата:** май 2026 · **Статус:** ✅ Live на GitHub Pages

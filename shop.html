@@ -872,6 +872,8 @@ function updateCart() {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   document.getElementById('cart-total').textContent = formatPrice(total);
 
+  localStorage.setItem('cart', JSON.stringify(cart));
+
   const itemsEl = document.getElementById('cart-items');
   if (cart.length === 0) {
     itemsEl.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
@@ -893,8 +895,6 @@ function updateCart() {
       <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
     </div>
   `).join('');
-
-  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 function changeQty(id, delta) {

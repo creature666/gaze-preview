@@ -919,7 +919,9 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+// Initialize page
 renderProducts('all');
+updateCart();
 
 function acceptCookies() {
   localStorage.setItem('cookiesAccepted', '1');

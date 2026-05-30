@@ -30,219 +30,24 @@
   }
 
   /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 48px; height: 71px;
-    background: rgba(23, 23, 23, 0.75);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.15),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-      inset 0 0 20px rgba(200, 150, 255, 0.08),
-      0 8px 16px rgba(0, 0, 0, 0.2);  }
 
-  .nav-logo img { filter: invert(1); }
 
-  .nav-logo {
-    position: absolute;
-    left: 48px;
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-  }
 
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
 
-  .nav-links a {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-  }
 
-  .nav-links a:hover, .nav-links a.active { opacity: 1; }
 
-  /* NAV DROPDOWN */
-  .nav-dropdown {
-    position: relative;
-  }
 
-  .nav-dropdown-menu {
-    position: fixed;
-    top: 71px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: rgba(23, 23, 23, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    display: grid;
-    grid-template-columns: auto;
-    grid-auto-flow: column;
-    justify-content: center;
-    align-content: start;
-    padding: 60px 80px;
-    gap: 160px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 150;
-  }
-
-  .nav-dropdown-menu a {
-    padding: 14px 0;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    transition: color 0.15s ease-out;
-    white-space: nowrap;
-    display: block;
-  }
-
-  .nav-dropdown-menu a:hover {
-    color: white;
-  }
-
-  .nav-dropdown-menu a:first-child {
-    font-weight: 500;
-    color: white;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: block;
-    width: 100%;
-  }
   /* MOBILE NAV (hamburger, search, cart) */
-  .nav-mobile-right { display: none; }
-  
-  .nav-search { display: none; }
-  .nav-cart { display: none; }
 
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-  }
 
-  .hamburger:hover { opacity: 1; }
-  .hamburger span { width: 24px; height: 2px; background: white; }
 
-  .nav-search {
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-  }
-
-  .nav-search:hover { opacity: 1; }
-
-  .nav-cart {
-    cursor: pointer;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-  }
-
-  .nav-cart:hover { opacity: 1; }
-  .nav-search svg, .nav-cart svg {
-    width: 20px;
-    height: 20px;
-    color: white;
-    opacity: inherit;
-    transition: opacity 0.2s;
-  }
 
   /* Mobile menu (hidden by default) */
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 71px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: rgba(23, 23, 23, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    flex-direction: column;
-    padding: 20px 48px;
-    z-index: 150;
-    list-style: none;
-    margin: 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .mobile-menu.active {
-    display: flex;
-    max-height: 100vh;
-    opacity: 1;
-  }
-
-  .mobile-menu li { list-style: none; }
-
-  .mobile-menu a {
-    display: block;
-    padding: 12px 0;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .mobile-menu a:hover,
-  .mobile-menu a.active { color: white; }
 
 
-  .nav-cart {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-    cursor: pointer;
-  }
 
-  .nav-cart:hover { opacity: 1; }
 
-  .nav-search {
-    cursor: pointer;
-    font-size: 16px;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-  }
 
-  .nav-search:hover {
-    opacity: 1;
-  }
 
   /* SEARCH MODAL */
   .search-modal {
@@ -838,86 +643,8 @@
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
 
   @media (max-width: 768px) {
-    nav { padding: 12px 20px; gap: 12px; }
-    .nav-logo img { height: 16px !important; }
 
-    /* Desktop nav hidden on mobile */
-    .nav-links:not(.mobile-menu) { display: none; }
 
-    /* Mobile nav: search, cart, hamburger visible */
-    .nav-mobile-right {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      margin-left: auto;
-      padding-right: 20px;
-    }
-
-    .hamburger {
-      display: flex;
-      width: 20px;
-      height: 20px;
-      flex-direction: column;
-      gap: 4px;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .hamburger {
-      display: flex !important;
-    }
-    .hamburger:hover { opacity: 1; }
-    .hamburger span { width: 20px; height: 1.5px; background: white; }
-    
-    .nav-search {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .nav-search:hover { opacity: 1; }
-    
-    .nav-cart {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .nav-cart:hover { opacity: 1; }
-
-    /* Mobile menu styles */
-    .mobile-menu {
-      padding: 20px 48px;
-    }
-
-    .mobile-menu a {
-      padding: 12px 0;
-      font-size: 11px;
-    }
-    .nav-links { gap: 14px; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
-    .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
-
-    .page-header { padding: 100px 20px 40px; flex-direction: column; gap: 8px; }
-
-    .filters { padding: 16px 20px; overflow-x: auto; gap: 6px; }
-    .filter-btn { font-size: 9px; padding: 6px 12px; white-space: nowrap; flex-shrink: 0; }
-
-    .shop-grid { padding: 24px 20px 80px; grid-template-columns: repeat(2, 1fr); }
-
-    .cart-sidebar { width: 100%; }
-.cookie-banner { padding: 12px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
-    .cookie-text { max-width: none; }
-  }
 
   /* FOOTER */
   footer {
@@ -1261,49 +988,9 @@
 </style>
 </head>
 <body>
+  <div id="nav-container"></div>
 
-<nav>
-  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
 
-  <!-- Desktop nav -->
-  <ul class="nav-links">
-    <li><a href="shop.html">Каталог</a></li>
-    <li><a href="care.html">Уход</a></li>
-    <li><a href="perfumes.html">Парфюмы</a></li>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="where.html">Где купить</a></li>
-    <li><a href="b2b.html">B2B</a></li>
-    <li><a href="collab.html">Коллаборации</a></li>
-  </ul>
-
-  <!-- Mobile nav (icons + hamburger) -->
-  <div class="nav-mobile-right">
-    <span class="nav-search" onclick="openSearch()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-      <circle cx="8" cy="8" r="6"/>
-      <path d="M12.5 12.5L17 17"/>
-    </svg></span>
-    <span class="nav-cart" onclick="toggleCart()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 2h6c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2h-6c-1.1 0-2-.9-2-2v0c0-1.1.9-2 2-2z"/>
-      <path d="M5 6h14c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z"/>
-    </svg></span>
-    <div class="hamburger" onclick="toggleMobileMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <!-- Mobile menu (dropdown) -->
-  <ul class="nav-links mobile-menu" id="mobile-menu">
-    <li><a href="shop.html">Каталог</a></li>
-    <li><a href="care.html">Уход</a></li>
-    <li><a href="perfumes.html">Парфюмы</a></li>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="where.html">Где купить</a></li>
-    <li><a href="b2b.html">B2B</a></li>
-    <li><a href="collab.html">Коллаборации</a></li>
-  </ul>
-</nav>
 
 <!-- SEARCH MODAL -->
 <div id="search-modal" class="search-modal">
@@ -2030,7 +1717,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-</script>
+
+  // Load navigation
+  fetch('./nav.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('nav-container').innerHTML = html);
+
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.toggle('active');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.remove('active');
+      });
+    });
+  });
+  </script>
 
 <!-- PRODUCT MODAL -->
 <div id="product-modal" class="modal">

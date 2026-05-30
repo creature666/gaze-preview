@@ -11,102 +11,9 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root { --black: #171717; --gray: #8A8A8A; --sans: Arial, sans-serif; }
   body { background: #fff; color: var(--black); font-family: var(--sans); font-weight: 400; }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 48px; height: 71px; background: rgba(23, 23, 23, 0.75);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.15),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-      inset 0 0 20px rgba(200, 150, 255, 0.08),
-      0 8px 16px rgba(0, 0, 0, 0.2);  }
-  .nav-logo { position: absolute; left: 48px; }
-  .nav-logo img { height: 22px; display: block; filter: invert(1); }
-  .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: white; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
-  .nav-links a:hover { opacity: 1; }
-  .page-wrap { max-width: 720px; margin: 0 auto; padding: 196px 48px 120px; }
-  .page-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray); margin-bottom: 40px; }
-  .page-title { font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 400; margin-bottom: 64px; }
-  h2 { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 400; margin: 40px 0 16px; }
-  p, li { font-size: 12px; line-height: 1.9; color: rgba(0,0,0,0.65); letter-spacing: 0.04em; margin-bottom: 12px; }
-  ul { padding-left: 20px; }
-  a { color: var(--black); }
-  .updated { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 24px; }
-  .highlight { background: rgba(0,0,0,0.03); padding: 20px 24px; margin: 24px 0; border-left: 2px solid var(--black); }
-  .highlight p { color: var(--black); font-weight: 400; margin: 0; }
 
-  @media (max-width: 768px) {
-    nav { padding: 12px 20px; }
-    .nav-logo img { height: 16px !important; }
 
-    /* Desktop nav hidden on mobile */
-    .nav-links:not(.mobile-menu) { display: none; }
 
-    /* Mobile nav: search, cart, hamburger visible */
-    .nav-mobile-right {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      margin-left: auto;
-      padding-right: 20px;
-    }
-
-    .hamburger {
-      display: flex;
-      width: 20px;
-      height: 20px;
-      flex-direction: column;
-      gap: 4px;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-
-    .hamburger:hover { opacity: 1; }
-    .hamburger span { width: 20px; height: 1.5px; background: white; }
-    
-    .nav-search {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .nav-search:hover { opacity: 1; }
-    
-    .nav-cart {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .nav-cart:hover { opacity: 1; }
-
-    /* Mobile menu styles */
-    .mobile-menu {
-      padding: 20px 48px;
-    }
-
-    .mobile-menu a {
-      padding: 12px 0;
-      font-size: 11px;
-    }
-    .nav-links { gap: 14px; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
-    .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links a { font-size: 8px; letter-spacing: 0.15em; flex-shrink: 0; }
-    .page-wrap { padding: 140px 20px 80px; }
-  }
 
   /* FOOTER */
   footer {
@@ -206,48 +113,8 @@
 </style>
 </head>
 <body>
-<nav>
-  <a href="./" class="nav-logo"><img src="logo.svg" alt="Gaze" style="height:44px;display:block;"></a>
+  <div id="nav-container"></div>
 
-  <!-- Desktop nav -->
-  <ul class="nav-links">
-    <li><a href="shop.html">Каталог</a></li>
-    <li><a href="care.html">Уход</a></li>
-    <li><a href="perfumes.html">Парфюмы</a></li>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="where.html">Где купить</a></li>
-    <li><a href="b2b.html">B2B</a></li>
-    <li><a href="collab.html">Коллаборации</a></li>
-  </ul>
-
-  <!-- Mobile nav (icons + hamburger) -->
-  <div class="nav-mobile-right">
-    <span class="nav-search" onclick="openSearch()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-      <circle cx="8" cy="8" r="6"/>
-      <path d="M12.5 12.5L17 17"/>
-    </svg></span>
-    <span class="nav-cart" onclick="toggleCart()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 2h6c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2h-6c-1.1 0-2-.9-2-2v0c0-1.1.9-2 2-2z"/>
-      <path d="M5 6h14c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z"/>
-    </svg></span>
-    <div class="hamburger" onclick="toggleMobileMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <!-- Mobile menu (dropdown) -->
-  <ul class="nav-links mobile-menu" id="mobile-menu">
-    <li><a href="shop.html">Каталог</a></li>
-    <li><a href="care.html">Уход</a></li>
-    <li><a href="perfumes.html">Парфюмы</a></li>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="where.html">Где купить</a></li>
-    <li><a href="b2b.html">B2B</a></li>
-    <li><a href="collab.html">Коллаборации</a></li>
-  </ul>
-</nav>
 
 <div class="page-wrap">
   <div class="page-label">Правовые документы</div>
@@ -297,5 +164,25 @@
   <h2>6. Контакт</h2>
   <p>По всем вопросам возврата и обмена: <a href="mailto:gazeoline01@gmail.com">gazeoline01@gmail.com</a></p>
 </div>
+<script>
+  // Load navigation
+  fetch('./nav.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('nav-container').innerHTML = html);
+
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.toggle('active');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.remove('active');
+      });
+    });
+  });
+</script>
 </body>
 </html>

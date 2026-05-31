@@ -493,8 +493,12 @@
     letter-spacing: 0.15em;
   }
 
-  .cart-
-.cart-total {
+  .cart-footer {
+    padding: 24px 32px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .cart-total {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -606,10 +610,6 @@
   }
 
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
-
-  @media (max-width: 768px) {
-
-
 
   /* FOOTER */
   footer {
@@ -985,7 +985,8 @@
   <button class="filter-btn active" onclick="filterProducts('all', this)">Все</button>
   <button class="filter-btn" onclick="filterProducts('уход', this)">Уход</button>
   <button class="filter-btn" onclick="filterProducts('свеча', this)">Свечи</button>
-  <button class="filter-btn" onclick="filterProducts('объект', this)">Объекты</button>
+  <button class="filter-btn" onclick="filterProducts('парфюм', this)">Парфюмы</button>
+  <button class="filter-btn" onclick="filterProducts('диффузор', this)">Диффузоры</button>
   <button class="filter-btn" onclick="filterProducts('рефилл', this)">Рефилл</button>
   <button class="filter-btn" onclick="filterProducts('коллаборации', this)">Коллаборации</button>
 </div>
@@ -1007,7 +1008,7 @@
       <span class="cart-total-label">Итого</span>
       <span class="cart-total-price" id="cart-total">0 ₽</span>
     </div>
-    <button class="cart-checkout">Оформить заказ →</button>
+    <button class="cart-checkout" onclick="checkout()">Оформить заказ →</button>
   </div>
 </div>
 
@@ -1402,8 +1403,8 @@ function renderProducts(filter) {
   grid.innerHTML = filtered.map(p => `
     <div class="product-card" data-category="${p.category}" onclick="openProductModal(${p.id})" style="cursor: pointer;">
       <div class="product-img-wrap">
-        <img class="product-img-main" src="${p.img}" alt="${p.name}" loading="lazy">
-        ${p.img2 ? `<img class="product-img-hover" src="${p.img2}" alt="${p.name}" loading="lazy">` : ''}
+        <img class="product-img-main" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.visibility='hidden'">
+        ${p.img2 ? `<img class="product-img-hover" src="${p.img2}" alt="${p.name}" loading="lazy" onerror="this.style.visibility='hidden'">` : ''}
         <button class="product-add" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>
       </div>
       <div class="product-info">
@@ -1451,7 +1452,7 @@ function updateCart() {
 
   itemsEl.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}" onerror="this.style.visibility='hidden'">
       <div>
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-sub">${item.sub || ''}</div>
@@ -1491,6 +1492,27 @@ function showToast(msg) {
 // Initialize page
 renderProducts('all');
 updateCart();
+
+// Auto-open cart or search if redirected from another page
+if (window.location.hash === '#cart') {
+  window.history.replaceState({}, '', window.location.pathname);
+  setTimeout(toggleCart, 300);
+} else if (window.location.hash === '#search') {
+  window.history.replaceState({}, '', window.location.pathname);
+  setTimeout(openSearch, 300);
+}
+// Handle ?q= search from other pages
+const urlQ = new URLSearchParams(window.location.search).get('q');
+if (urlQ) {
+  window.history.replaceState({}, '', window.location.pathname);
+  setTimeout(() => {
+    openSearch();
+    setTimeout(() => {
+      const inp = document.getElementById('search-input');
+      if (inp) { inp.value = urlQ; inp.dispatchEvent(new Event('input')); }
+    }, 200);
+  }, 300);
+}
 
 function acceptCookies() {
   localStorage.setItem('cookiesAccepted', '1');
@@ -1636,7 +1658,7 @@ function performSearch() {
 
   resultsContainer.innerHTML = results.map(p => `
     <div class="search-result-item" onclick="openProductModal(${p.id}); closeSearch();">
-      <img src="${p.img}" alt="${p.name}">
+      <img src="${p.img}" alt="${p.name}" onerror="this.style.visibility='hidden'">
       <div class="search-result-name">${p.name}</div>
       <div class="search-result-price">${formatPrice(p.price)}</div>
     </div>
@@ -1658,30 +1680,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-  // MOBILE MENU TOGGLE
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('active');
+  // Load navigation
+  function checkout() {
+    window.location.href = 'mailto:gazeoline01@gmail.com?subject=Заказ с сайта&body=Здравствуйте! Хочу оформить заказ.';
   }
 
-  // Close menu when link is clicked
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.remove('active');
-    });
-  });
-
-  // Close menu when clicking outside nav
-  document.addEventListener('click', (e) => {
-    const nav = document.querySelector('nav');
-    const menu = document.getElementById('mobile-menu');
-    if (!nav.contains(e.target)) {
-      menu.classList.remove('active');
-    }
-  });
-
-
-  // Load navigation
   fetch('./nav.html')
     .then(r => r.text())
     .then(html => document.getElementById('nav-container').innerHTML = html);
@@ -1708,7 +1711,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="modal-close" onclick="closeProductModal()">&times;</button>
 
     <div class="modal-images">
-      <img id="modal-main-image" src="" alt="Product">
+      <img id="modal-main-image" src="" alt="Product" onerror="this.style.visibility='hidden'">
       <div class="modal-image-counter">
         <span id="modal-image-index">1</span> / <span id="modal-image-total">2</span>
       </div>
@@ -1742,5 +1745,6 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
+<script src="editmode.js"></script>
 </body>
 </html>

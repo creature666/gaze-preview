@@ -30,26 +30,13 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
-
-
-
-
-
-
-
-
-
-
-  /* MOBILE NAV (hamburger, search, cart) */
-
-
-
-
-  /* Mobile menu (hidden by default) */
-
-
-
+  /* HERO */
+  .hero {
+    height: 100vh;
+    padding-top: 71px;
+    position: relative;
+    overflow: hidden;
+  }
 
   .hero-bg {
     position: absolute;
@@ -518,7 +505,7 @@
   <div class="products-grid reveal">
     <div class="product-card">
       <div class="product-img">
-        <img class="product-img-inner" src="images/c5c11ab33002019b986e5eed43823790.jpg.jpeg" alt="Troll">
+        <img class="product-img-inner" onerror="this.style.visibility='hidden'" src="images/c5c11ab33002019b986e5eed43823790.jpg.jpeg" alt="Troll">
       </div>
       <div class="product-name">Troll</div>
       <div class="product-sub">Smelly Tale × Gaze</div>
@@ -526,7 +513,7 @@
     </div>
     <div class="product-card">
       <div class="product-img">
-        <img class="product-img-inner" src="images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg" alt="Свеча Temple of Boxing">
+        <img class="product-img-inner" onerror="this.style.visibility='hidden'" src="images/90c06c349f72e4c944e05997897fec7e.jpg.jpeg" alt="Свеча Temple of Boxing">
       </div>
       <div class="product-name">Temple of Boxing</div>
       <div class="product-sub">Свеча · Gaze × Backyard</div>
@@ -534,7 +521,7 @@
     </div>
     <div class="product-card">
       <div class="product-img">
-        <img class="product-img-inner" src="images/3f641a35451effc99d4337841e743778.jpg.jpeg" alt="Лосьон Red Mercury">
+        <img class="product-img-inner" onerror="this.style.visibility='hidden'" src="images/3f641a35451effc99d4337841e743778.jpg.jpeg" alt="Лосьон Red Mercury">
       </div>
       <div class="product-name">Лосьон Red Mercury</div>
       <div class="product-sub">Рефилл 5 литров</div>
@@ -542,7 +529,7 @@
     </div>
     <div class="product-card">
       <div class="product-img">
-        <img class="product-img-inner" src="images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg" alt="Кондиционер Red Mercury">
+        <img class="product-img-inner" onerror="this.style.visibility='hidden'" src="images/8e1f856d9d6bd177067e32ed80119ed8.jpg.jpeg" alt="Кондиционер Red Mercury">
       </div>
       <div class="product-name">Кондиционер Red Mercury</div>
       <div class="product-sub">Рефилл 5 литров</div>
@@ -610,68 +597,30 @@
     document.getElementById('cookie-banner').classList.add('hidden');
   }
 
-  // NAV DROPDOWN
-  const navDropdown = document.querySelector('.nav-dropdown');
-  const navDropdownMenu = document.querySelector('.nav-dropdown-menu');
-  let dropdownTimeout;
-
-  if (navDropdown && navDropdownMenu) {
-    navDropdown.addEventListener('mouseenter', () => {
-      clearTimeout(dropdownTimeout);
-      navDropdownMenu.style.opacity = '1';
-      navDropdownMenu.style.visibility = 'visible';
-      navDropdownMenu.style.pointerEvents = 'auto';
-    });
-
-    navDropdown.addEventListener('mouseleave', () => {
-      dropdownTimeout = setTimeout(() => {
-        navDropdownMenu.style.opacity = '0';
-        navDropdownMenu.style.visibility = 'hidden';
-        navDropdownMenu.style.pointerEvents = 'none';
-      }, 100);
-    });
-  }
-
-  // MOBILE MENU TOGGLE
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('active');
-  }
-
-  // Close menu when link is clicked
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.remove('active');
-    });
-  });
-
-  // Close menu when clicking outside nav
-  document.addEventListener('click', (e) => {
-    const nav = document.querySelector('nav');
-    const menu = document.getElementById('mobile-menu');
-    if (!nav.contains(e.target)) {
-      menu.classList.remove('active');
-    }
-  });
-
-  // Load navigation
-  fetch('./nav.html')
-    .then(r => r.text())
-    .then(html => document.getElementById('nav-container').innerHTML = html);
-
-  // Mobile menu toggle
   function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('active');
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.remove('active');
+  // cart & search handled by cart-search.js
+
+  fetch('./nav.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('nav-container').innerHTML = html;
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('mobile-menu')?.classList.remove('active');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        const nav = document.querySelector('nav');
+        const menu = document.getElementById('mobile-menu');
+        if (nav && menu && !nav.contains(e.target)) menu.classList.remove('active');
       });
     });
-  });
   </script>
+<script src="cart-search.js"></script>
+<script src="editmode.js"></script>
 </body>
 </html>

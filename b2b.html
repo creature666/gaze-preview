@@ -28,18 +28,26 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
-
-
-
+  /* PAGE */
+  .section-b2b {
+    background: var(--red);
+    padding: 140px 48px 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    min-height: 100vh;
+  }
 
   .b2b-title {
-    font-family: var(--sans);
     font-size: clamp(60px, 9vw, 130px);
     font-weight: 700;
     line-height: 0.9;
     letter-spacing: -0.03em;
     text-transform: uppercase;
+    color: white;
+    position: sticky;
+    top: 120px;
   }
 
   .b2b-text {
@@ -55,7 +63,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   .b2b-partner {
@@ -87,54 +95,8 @@
     padding-bottom: 4px;
     transition: gap 0.3s;
   }
-
   .b2b-cta:hover { gap: 24px; }
   .b2b-cta::after { content: '→'; }
-  /* COOKIE BANNER */
-  .cookie-banner {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: var(--black);
-    color: white;
-    padding: 16px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-    z-index: 400;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.4s ease;
-  }
-
-  .cookie-banner.hidden { transform: translateY(100%); }
-
-  .cookie-text {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.7;
-    max-width: 700px;
-  }
-
-  .cookie-text a { color: rgba(255,255,255,0.6); text-decoration: underline; }
-
-  .cookie-accept {
-    background: white;
-    color: var(--black);
-    border: none;
-    padding: 10px 24px;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: var(--sans);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-
-  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
 
   /* reveal */
   .reveal {
@@ -142,16 +104,10 @@
     transform: translateY(24px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
-
-  @media (max-width: 768px) {
-
-
-
 
   /* FOOTER */
   footer {
@@ -213,10 +169,9 @@
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.2); text-decoration: none;
+    color: rgba(255,255,255,0.2);
     line-height: 1.5;
   }
-
   .footer-requisites a {
     color: inherit;
     text-decoration: none;
@@ -248,14 +203,69 @@
     color: rgba(255,255,255,0.12);
     letter-spacing: 0.05em;
   }
+
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--black);
+    color: white;
+    padding: 16px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 400;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.4s ease;
+  }
+  .cookie-banner.hidden { transform: translateY(100%); }
+  .cookie-text {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+  .cookie-text a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+  .cookie-accept {
+    background: white;
+    color: var(--black);
+    border: none;
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .section-b2b {
+      padding: 100px 20px 80px;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      min-height: auto;
+    }
+    .b2b-title { position: static; }
+    footer { padding: 48px 20px 32px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-bottom-right { text-align: left; }
+    .cookie-banner { padding: 12px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .cookie-text { max-width: none; }
+  }
 </style>
 </head>
 <body>
-  <div id="nav-container"></div>
+<div id="nav-container"></div>
 
-
-
-<!-- B2B -->
 <section class="section-b2b">
   <div class="b2b-title reveal">B2B</div>
   <div class="b2b-content reveal">
@@ -270,11 +280,10 @@
       <div class="b2b-partner">Igla</div>
       <div class="b2b-partner">No Regrets</div>
     </div>
-    <a href="#" class="b2b-cta">Стать партнёром</a>
+    <a href="mailto:gazeoline01@gmail.com" class="b2b-cta">Стать партнёром</a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-left">
@@ -328,53 +337,34 @@
     localStorage.setItem('cookiesAccepted', '1');
     document.getElementById('cookie-banner').classList.add('hidden');
   }
-
   if (localStorage.getItem('cookiesAccepted')) {
     document.getElementById('cookie-banner').classList.add('hidden');
   }
 
-  // MOBILE MENU TOGGLE
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('active');
-  }
-
-  // Close menu when link is clicked
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.remove('active');
-    });
-  });
-
-  // Close menu when clicking outside nav
-  document.addEventListener('click', (e) => {
-    const nav = document.querySelector('nav');
-    const menu = document.getElementById('mobile-menu');
-    if (!nav.contains(e.target)) {
-      menu.classList.remove('active');
-    }
-  });
-
-
-  // Load navigation
-  fetch('./nav.html')
-    .then(r => r.text())
-    .then(html => document.getElementById('nav-container').innerHTML = html);
-
-  // Mobile menu toggle
   function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('active');
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.remove('active');
+  // cart & search handled by cart-search.js
+
+  fetch('./nav.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('nav-container').innerHTML = html;
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('mobile-menu')?.classList.remove('active');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        const nav = document.querySelector('nav');
+        const menu = document.getElementById('mobile-menu');
+        if (nav && menu && !nav.contains(e.target)) menu.classList.remove('active');
       });
     });
-  });
-  </script>
-
+</script>
+<script src="cart-search.js"></script>
+<script src="editmode.js"></script>
 </body>
 </html>

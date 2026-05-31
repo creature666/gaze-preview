@@ -181,13 +181,28 @@
   /* CATEGORY HERO */
   .category-hero {
     margin-top: 71px;
-    padding: 80px 48px;
-    background: linear-gradient(135deg, rgba(200, 180, 150, 0.1) 0%, rgba(220, 200, 170, 0.05) 100%);
+    padding: 40px 48px;
+    height: calc(67vh - 71px);
+    background: url('images/image-1780179387170.webp') center center / cover no-repeat;
     border-bottom: 1px solid rgba(0,0,0,0.08);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .category-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+  }
+
+  .category-hero-text {
+    position: relative;
+    z-index: 1;
   }
 
   .category-hero-text h1 {
@@ -197,20 +212,19 @@
     font-weight: 400;
     margin-bottom: 32px;
     line-height: 1.2;
+    color: white;
   }
 
   .category-hero-text p {
     font-size: 14px;
     letter-spacing: 0.04em;
     line-height: 1.8;
-    color: rgba(0,0,0,0.65);
+    color: rgba(255,255,255,0.8);
     max-width: 480px;
   }
 
   .category-hero-image {
-    aspect-ratio: 4/5;
-    background: rgba(0,0,0,0.04);
-    border-radius: 2px;
+    display: none;
   }
 
   /* PAGE HEADER */
@@ -528,8 +542,12 @@
     letter-spacing: 0.15em;
   }
 
-  .cart-
-.cart-total {
+  .cart-footer {
+    padding: 24px 32px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .cart-total {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -641,10 +659,6 @@
   }
 
   .cookie-accept:hover { background: rgba(255,255,255,0.85); }
-
-  @media (max-width: 768px) {
-
-
 
   /* FOOTER */
   footer {
@@ -1041,7 +1055,7 @@
       <span class="cart-total-label">Итого</span>
       <span class="cart-total-price" id="cart-total">0 ₽</span>
     </div>
-    <button class="cart-checkout">Оформить заказ →</button>
+    <button class="cart-checkout" onclick="checkout()">Оформить заказ →</button>
   </div>
 </div>
 
@@ -1436,8 +1450,8 @@ function renderProducts(filter) {
   grid.innerHTML = filtered.map(p => `
     <div class="product-card" data-category="${p.category}" onclick="openProductModal(${p.id})" style="cursor: pointer;">
       <div class="product-img-wrap">
-        <img class="product-img-main" src="${p.img}" alt="${p.name}" loading="lazy">
-        ${p.img2 ? `<img class="product-img-hover" src="${p.img2}" alt="${p.name}" loading="lazy">` : ''}
+        <img class="product-img-main" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.visibility='hidden'">
+        ${p.img2 ? `<img class="product-img-hover" src="${p.img2}" alt="${p.name}" loading="lazy" onerror="this.style.visibility='hidden'">` : ''}
         <button class="product-add" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>
       </div>
       <div class="product-info">
@@ -1485,7 +1499,7 @@ function updateCart() {
 
   itemsEl.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}" onerror="this.style.visibility='hidden'">
       <div>
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-sub">${item.sub || ''}</div>
@@ -1670,7 +1684,7 @@ function performSearch() {
 
   resultsContainer.innerHTML = results.map(p => `
     <div class="search-result-item" onclick="openProductModal(${p.id}); closeSearch();">
-      <img src="${p.img}" alt="${p.name}">
+      <img src="${p.img}" alt="${p.name}" onerror="this.style.visibility='hidden'">
       <div class="search-result-name">${p.name}</div>
       <div class="search-result-price">${formatPrice(p.price)}</div>
     </div>
@@ -1692,30 +1706,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-  // MOBILE MENU TOGGLE
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('active');
+  // Load navigation
+  function checkout() {
+    window.location.href = 'mailto:gazeoline01@gmail.com?subject=Заказ с сайта&body=Здравствуйте! Хочу оформить заказ.';
   }
 
-  // Close menu when link is clicked
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.remove('active');
-    });
-  });
-
-  // Close menu when clicking outside nav
-  document.addEventListener('click', (e) => {
-    const nav = document.querySelector('nav');
-    const menu = document.getElementById('mobile-menu');
-    if (!nav.contains(e.target)) {
-      menu.classList.remove('active');
-    }
-  });
-
-
-  // Load navigation
   fetch('./nav.html')
     .then(r => r.text())
     .then(html => document.getElementById('nav-container').innerHTML = html);
@@ -1742,7 +1737,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="modal-close" onclick="closeProductModal()">&times;</button>
 
     <div class="modal-images">
-      <img id="modal-main-image" src="" alt="Product">
+      <img id="modal-main-image" src="" alt="Product" onerror="this.style.visibility='hidden'">
       <div class="modal-image-counter">
         <span id="modal-image-index">1</span> / <span id="modal-image-total">2</span>
       </div>
@@ -1776,5 +1771,6 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
+<script src="editmode.js"></script>
 </body>
 </html>

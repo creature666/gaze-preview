@@ -26,23 +26,32 @@
     font-family: var(--sans);
     font-weight: 300;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
-  /* NAV */
+  footer {
+    margin-top: auto;
+  }
 
-
-
+  /* PAGE */
+  .section-where {
+    padding: 140px 48px 120px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
 
   .where-title {
-    font-family: var(--sans);
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     line-height: 1.6;
     position: sticky;
-    top: 220px;
-    align-self: start;
+    top: 120px;
   }
 
   .cities-grid {
@@ -52,7 +61,6 @@
   }
 
   .city-name {
-    font-family: var(--sans);
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.25em;
@@ -70,7 +78,7 @@
 
   .city-locations li {
     font-size: 11px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: rgba(0,0,0,0.5);
     line-height: 1.6;
@@ -84,59 +92,6 @@
     color: rgba(0,0,0,0.3);
     margin-top: 4px;
   }
-  /* COOKIE BANNER */
-  .cookie-banner {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: var(--black);
-    color: white;
-    padding: 16px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-    z-index: 400;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.4s ease;
-  }
-
-  .cookie-banner.hidden { transform: translateY(100%); }
-
-  .cookie-text {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.7;
-    max-width: 700px;
-  }
-
-  .cookie-text a { color: rgba(255,255,255,0.6); text-decoration: underline; }
-
-  .cookie-accept {
-    background: white;
-    color: var(--black);
-    border: none;
-    padding: 10px 24px;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: var(--sans);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-
-  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
-
-  /* DESKTOP NAV: search & cart visible (no hamburger) */
-  
-  
-  
-
-
-
 
   /* FOOTER */
   footer {
@@ -198,10 +153,9 @@
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.2); text-decoration: none;
+    color: rgba(255,255,255,0.2);
     line-height: 1.5;
   }
-
   .footer-requisites a {
     color: inherit;
     text-decoration: none;
@@ -233,18 +187,71 @@
     color: rgba(255,255,255,0.12);
     letter-spacing: 0.05em;
   }
+
+  /* COOKIE BANNER */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--black);
+    color: white;
+    padding: 16px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 400;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.4s ease;
+  }
+  .cookie-banner.hidden { transform: translateY(100%); }
+  .cookie-text {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+  .cookie-text a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+  .cookie-accept {
+    background: white;
+    color: var(--black);
+    border: none;
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .cookie-accept:hover { background: rgba(255,255,255,0.85); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .section-where {
+      padding: 100px 20px 80px;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .where-title { position: static; }
+    .cities-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 48px 20px 32px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-bottom-right { text-align: left; }
+    .cookie-banner { padding: 12px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .cookie-text { max-width: none; }
+  }
 </style>
 </head>
 <body>
-  <div id="nav-container"></div>
+<div id="nav-container"></div>
 
-
-
-<!-- WHERE -->
 <section class="section-where">
-  <div>
-    <h2 class="where-title">Где<br>купить</h2>
-  </div>
+  <h2 class="where-title">Где<br>купить</h2>
   <div class="cities-grid">
     <div class="city-block">
       <div class="city-name">Санкт-Петербург</div>
@@ -292,7 +299,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-left">
@@ -341,53 +347,34 @@
     localStorage.setItem('cookiesAccepted', '1');
     document.getElementById('cookie-banner').classList.add('hidden');
   }
-
   if (localStorage.getItem('cookiesAccepted')) {
     document.getElementById('cookie-banner').classList.add('hidden');
   }
 
-  // MOBILE MENU TOGGLE
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('active');
-  }
-
-  // Close menu when link is clicked
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.remove('active');
-    });
-  });
-
-  // Close menu when clicking outside nav
-  document.addEventListener('click', (e) => {
-    const nav = document.querySelector('nav');
-    const menu = document.getElementById('mobile-menu');
-    if (!nav.contains(e.target)) {
-      menu.classList.remove('active');
-    }
-  });
-
-
-  // Load navigation
-  fetch('./nav.html')
-    .then(r => r.text())
-    .then(html => document.getElementById('nav-container').innerHTML = html);
-
-  // Mobile menu toggle
   function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('active');
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.remove('active');
+  // cart & search handled by cart-search.js
+
+  fetch('./nav.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('nav-container').innerHTML = html;
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('mobile-menu')?.classList.remove('active');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        const nav = document.querySelector('nav');
+        const menu = document.getElementById('mobile-menu');
+        if (nav && menu && !nav.contains(e.target)) menu.classList.remove('active');
       });
     });
-  });
-  </script>
-
+</script>
+<script src="cart-search.js"></script>
+<script src="editmode.js"></script>
 </body>
 </html>
